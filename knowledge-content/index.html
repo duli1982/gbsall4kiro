@@ -41,16 +41,107 @@
             height: 100%;
             border: 0;
         }
+        
+        /* Progress tracking */
+        .progress-tracker {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .progress-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .progress-number {
+            font-weight: bold;
+            color: #4f46e5;
+        }
+        
+        /* Video completion tracking */
+        .video-completed {
+            background-color: #f0fdf4 !important;
+            border-color: #bbf7d0 !important;
+        }
+        
+        .video-completed summary::after {
+            content: " ✅";
+        }
+        
+        /* Enhanced mobile responsiveness */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .progress-tracker {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                padding: 0.75rem;
+            }
+            
+            .progress-item {
+                font-size: 0.75rem;
+            }
+            
+            details summary {
+                padding: 0.75rem;
+                font-size: 0.875rem;
+            }
+            
+            .iframe-container {
+                margin: 0.5rem 0;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
 
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <h3 class="font-semibold text-gray-900 mb-2">Your Progress</h3>
+            <div class="progress-item">
+                <span>Videos Watched:</span>
+                <span class="progress-number" id="videos-watched">0/8</span>
+            </div>
+            <div class="progress-item">
+                <span>Articles Read:</span>
+                <span class="progress-number" id="articles-read">0/25</span>
+            </div>
+            <div class="progress-item">
+                <span>Courses Started:</span>
+                <span class="progress-number" id="courses-started">0/7</span>
+            </div>
+        </div>
+
         <!-- Header Section -->
         <header class="text-center mb-10">
             <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">Gemini Training & Knowledge Content</h1>
             <p class="text-base sm:text-lg text-gray-600">This page contains links to knowledge articles, role-specific use cases, and online courses.</p>
+            
+            <!-- Overall Progress Bar -->
+            <div class="mt-6 max-w-md mx-auto">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>Overall Progress</span>
+                    <span id="overall-progress-text">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-indigo-600 h-2 rounded-full transition-all duration-300" style="width: 0%" id="overall-progress-bar"></div>
+                </div>
+            </div>
         </header>
 
         <main class="space-y-8">
@@ -131,5 +222,150 @@
     </div>
 
     <a href="../index.html" class="hub-button">Back To Hub</a>
+
+    <script>
+        // Knowledge content progress tracking
+        class KnowledgeTracker {
+            constructor() {
+                this.progress = {
+                    videosWatched: [],
+                    articlesRead: [],
+                    coursesStarted: []
+                };
+                
+                this.totals = {
+                    videos: 8,
+                    articles: 25,
+                    courses: 7
+                };
+                
+                this.init();
+            }
+            
+            init() {
+                this.loadProgress();
+                this.setupEventListeners();
+                this.updateUI();
+            }
+            
+            loadProgress() {
+                const saved = localStorage.getItem('knowledgeContentProgress');
+                if (saved) {
+                    this.progress = { ...this.progress, ...JSON.parse(saved) };
+                }
+            }
+            
+            saveProgress() {
+                localStorage.setItem('knowledgeContentProgress', JSON.stringify(this.progress));
+            }
+            
+            setupEventListeners() {
+                // Track video interactions
+                document.querySelectorAll('details').forEach((detail, index) => {
+                    const section = this.getSection(detail);
+                    
+                    detail.addEventListener('toggle', () => {
+                        if (detail.open) {
+                            this.markAsViewed(section, index);
+                        }
+                    });
+                    
+                    // Track external link clicks
+                    detail.querySelectorAll('a[target="_blank"]').forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (section === 'articles') {
+                                this.markAsViewed('articles', link.href);
+                            } else if (section === 'courses') {
+                                this.markAsViewed('courses', link.href);
+                            }
+                        });
+                    });
+                });
+            }
+            
+            getSection(element) {
+                const section = element.closest('section');
+                if (section.id === 'videos') return 'videos';
+                if (section.id === 'articles') return 'articles';
+                if (section.id === 'courses') return 'courses';
+                return 'other';
+            }
+            
+            markAsViewed(type, identifier) {
+                const key = type === 'videos' ? 'videosWatched' : 
+                           type === 'articles' ? 'articlesRead' : 'coursesStarted';
+                
+                if (!this.progress[key].includes(identifier)) {
+                    this.progress[key].push(identifier);
+                    this.saveProgress();
+                    this.updateUI();
+                    this.showProgressNotification(type);
+                }
+            }
+            
+            updateUI() {
+                // Update progress numbers
+                document.getElementById('videos-watched').textContent = 
+                    `${this.progress.videosWatched.length}/${this.totals.videos}`;
+                document.getElementById('articles-read').textContent = 
+                    `${this.progress.articlesRead.length}/${this.totals.articles}`;
+                document.getElementById('courses-started').textContent = 
+                    `${this.progress.coursesStarted.length}/${this.totals.courses}`;
+                
+                // Calculate overall progress
+                const totalItems = this.totals.videos + this.totals.articles + this.totals.courses;
+                const completedItems = this.progress.videosWatched.length + 
+                                     this.progress.articlesRead.length + 
+                                     this.progress.coursesStarted.length;
+                
+                const overallProgress = Math.round((completedItems / totalItems) * 100);
+                
+                document.getElementById('overall-progress-text').textContent = `${overallProgress}%`;
+                document.getElementById('overall-progress-bar').style.width = `${overallProgress}%`;
+                
+                // Mark completed items visually
+                this.updateVisualProgress();
+                
+                // Report to main hub
+                if (window.parent && window.parent.updateModuleProgress) {
+                    const sectionsCompleted = Math.min(Math.floor(overallProgress / 12.5), 8);
+                    window.parent.updateModuleProgress('knowledge-content', sectionsCompleted);
+                }
+            }
+            
+            updateVisualProgress() {
+                // Mark watched videos
+                document.querySelectorAll('#videos details').forEach((detail, index) => {
+                    if (this.progress.videosWatched.includes(index)) {
+                        detail.classList.add('video-completed');
+                    }
+                });
+            }
+            
+            showProgressNotification(type) {
+                const messages = {
+                    videos: 'Video watched! 🎥',
+                    articles: 'Article read! 📚',
+                    courses: 'Course started! 🎓'
+                };
+                
+                const notification = document.createElement('div');
+                notification.className = 'fixed top-4 right-4 bg-green-100 border border-green-200 text-green-800 px-4 py-2 rounded-lg shadow-lg z-50';
+                notification.textContent = messages[type];
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => notification.remove(), 300);
+                }, 2000);
+            }
+        }
+        
+        // Initialize tracker when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new KnowledgeTracker();
+        });
+    </script>
 </body>
 </html>
