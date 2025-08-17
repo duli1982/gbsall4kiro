@@ -62,14 +62,12 @@
                     </div>
                 </div>
                 <div class="mt-8 grid md:grid-cols-2 gap-6">
-                    <div class="module-card relative" onclick="navigateTo('module-1')" data-module="1">
-                        <div class="module-progress" id="module-1-progress">Not Started</div>
+                    <div class="module-card" onclick="navigateTo('module-1')">
                         <p class="text-sm font-semibold text-blue-600">MODULE 1</p>
                         <h3 class="google-sans text-xl font-bold mt-2">Prompting &amp; Writing — The C.R.E.A.T.E. Framework</h3>
                         <p class="mt-2 text-gray-600">Learn the C.R.E.A.T.E. framework — a structured approach (Character, Request, Examples, Additions, Type, Extras) for crafting precise, repeatable, high-quality prompts.</p>
                     </div>
-                    <div class="module-card relative" onclick="navigateTo('module-2')" data-module="2">
-                        <div class="module-progress" id="module-2-progress">Not Started</div>
+                    <div class="module-card" onclick="navigateTo('module-2')">
                         <p class="text-sm font-semibold text-blue-600">MODULE 2</p>
                         <h3 class="google-sans text-xl font-bold mt-2">Sourcing & Research</h3>
                         <p class="mt-2 text-gray-600">Generate complex Boolean strings and perform rapid market analysis.</p>
@@ -147,182 +145,6 @@
     </footer>
 
     <script src="js/app.js"></script>
-    
-    <script>
-        // RPO Training Progress Tracker
-        class RPOProgressTracker {
-            constructor() {
-                this.modules = [
-                    { id: 1, name: 'Prompting & Writing', phase: 1 },
-                    { id: 2, name: 'Sourcing & Research', phase: 1 },
-                    { id: 3, name: 'Data & Knowledge', phase: 2 },
-                    { id: 4, name: 'Automation', phase: 2 },
-                    { id: 5, name: 'Train the Trainer', phase: 2 },
-                    { id: 6, name: 'Strategy & Governance', phase: 3 },
-                    { id: 7, name: 'Measuring Impact', phase: 3 }
-                ];
-                
-                this.progress = {
-                    completedModules: [],
-                    currentModule: null,
-                    timeSpent: 0,
-                    lastVisit: null
-                };
-                
-                this.init();
-            }
-            
-            init() {
-                this.loadProgress();
-                this.setupEventListeners();
-                this.updateUI();
-            }
-            
-            loadProgress() {
-                const saved = localStorage.getItem('rpoTrainingProgress');
-                if (saved) {
-                    this.progress = { ...this.progress, ...JSON.parse(saved) };
-                }
-            }
-            
-            saveProgress() {
-                localStorage.setItem('rpoTrainingProgress', JSON.stringify(this.progress));
-            }
-            
-            setupEventListeners() {
-                // Progress toggle button
-                const progressToggle = document.getElementById('progress-toggle');
-                const progressIndicator = document.getElementById('progress-indicator');
-                
-                if (progressToggle && progressIndicator) {
-                    progressToggle.addEventListener('click', () => {
-                        const isVisible = progressIndicator.style.display !== 'none';
-                        progressIndicator.style.display = isVisible ? 'none' : 'block';
-                    });
-                }
-                
-                // Track module clicks
-                document.querySelectorAll('.module-card[data-module]').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const moduleId = parseInt(card.dataset.module);
-                        this.startModule(moduleId);
-                    });
-                });
-                
-                // Auto-show progress indicator after 3 seconds
-                setTimeout(() => {
-                    if (progressIndicator) {
-                        progressIndicator.style.display = 'block';
-                        setTimeout(() => {
-                            progressIndicator.style.display = 'none';
-                        }, 5000);
-                    }
-                }, 3000);
-            }
-            
-            startModule(moduleId) {
-                this.progress.currentModule = moduleId;
-                
-                // Mark as started if not already completed
-                if (!this.progress.completedModules.includes(moduleId)) {
-                    this.updateModuleStatus(moduleId, 'In Progress');
-                }
-                
-                this.saveProgress();
-                this.updateUI();
-            }
-            
-            completeModule(moduleId) {
-                if (!this.progress.completedModules.includes(moduleId)) {
-                    this.progress.completedModules.push(moduleId);
-                    this.updateModuleStatus(moduleId, 'Completed');
-                    this.showCompletionNotification(moduleId);
-                }
-                
-                this.saveProgress();
-                this.updateUI();
-                
-                // Report to main hub
-                if (window.parent && window.parent.updateModuleProgress) {
-                    window.parent.updateModuleProgress('rpo-training', this.progress.completedModules.length);
-                }
-            }
-            
-            updateModuleStatus(moduleId, status) {
-                const progressElement = document.getElementById(`module-${moduleId}-progress`);
-                if (progressElement) {
-                    progressElement.textContent = status;
-                    progressElement.className = `module-progress ${status.toLowerCase().replace(' ', '-')}`;
-                }
-            }
-            
-            updateUI() {
-                const completedCount = this.progress.completedModules.length;
-                const totalModules = this.modules.length;
-                const progressPercentage = Math.round((completedCount / totalModules) * 100);
-                
-                // Update progress indicator
-                const modulesCompletedEl = document.getElementById('modules-completed');
-                const progressBarEl = document.getElementById('progress-bar');
-                const progressTextEl = document.getElementById('progress-text');
-                
-                if (modulesCompletedEl) {
-                    modulesCompletedEl.textContent = `${completedCount}/${totalModules}`;
-                }
-                
-                if (progressBarEl) {
-                    progressBarEl.style.width = `${progressPercentage}%`;
-                }
-                
-                if (progressTextEl) {
-                    progressTextEl.textContent = `${progressPercentage}% Complete`;
-                }
-                
-                // Update individual module statuses
-                this.modules.forEach(module => {
-                    const status = this.progress.completedModules.includes(module.id) ? 'Completed' :
-                                  this.progress.currentModule === module.id ? 'In Progress' : 'Not Started';
-                    this.updateModuleStatus(module.id, status);
-                });
-            }
-            
-            showCompletionNotification(moduleId) {
-                const module = this.modules.find(m => m.id === moduleId);
-                if (!module) return;
-                
-                const notification = document.createElement('div');
-                notification.className = 'fixed top-4 right-4 bg-green-100 border border-green-200 text-green-800 px-4 py-3 rounded-lg shadow-lg z-50';
-                notification.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <span class="text-xl">🎉</span>
-                        <div>
-                            <div class="font-semibold">Module Completed!</div>
-                            <div class="text-sm">${module.name}</div>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(notification);
-                
-                setTimeout(() => {
-                    notification.style.opacity = '0';
-                    setTimeout(() => notification.remove(), 300);
-                }, 4000);
-            }
-        }
-        
-        // Initialize progress tracker
-        document.addEventListener('DOMContentLoaded', () => {
-            window.rpoTracker = new RPOProgressTracker();
-        });
-        
-        // Expose function for modules to report completion
-        window.completeRPOModule = (moduleId) => {
-            if (window.rpoTracker) {
-                window.rpoTracker.completeModule(moduleId);
-            }
-        };
-    </script>
 
 </body>
 </html>

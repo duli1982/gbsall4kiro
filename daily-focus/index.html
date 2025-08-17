@@ -62,90 +62,6 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
-        /* Enhanced Progress Tracking */
-        .stats-container {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-        }
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.9;
-        }
-        
-        /* Badge notifications */
-        .badge-notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: white;
-            border: 2px solid #10b981;
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            z-index: 1000;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        .badge-notification.show {
-            transform: translateX(0);
-        }
-        
-        /* Mobile improvements */
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            .card {
-                min-height: 400px;
-                padding: 1rem;
-            }
-            .stats-container {
-                padding: 1rem;
-            }
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            #card-navigation {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            #card-navigation button {
-                width: 100%;
-                padding: 0.75rem;
-            }
-        }
-        
-        /* Search enhancement */
-        .search-container {
-            position: relative;
-            margin-bottom: 1rem;
-        }
-        .search-input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.5rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-        }
-        .search-icon {
-            position: absolute;
-            left: 0.75rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6b7280;
-        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -156,28 +72,6 @@
 
         <header class="text-center mb-6">
             <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Daily Sourcing Focus</h1>
-            
-            <!-- Progress Stats -->
-            <div class="stats-container mt-6">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="stat-item">
-                        <span class="stat-number" id="cards-completed">0</span>
-                        <span class="stat-label">Cards Completed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="current-streak">0</span>
-                        <span class="stat-label">Day Streak</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="total-actions">0</span>
-                        <span class="stat-label">Actions Done</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="badges-count">0</span>
-                        <span class="stat-label">Badges Earned</span>
-                    </div>
-                </div>
-            </div>
         </header>
 
         <!-- Card of the Day Section -->
@@ -198,19 +92,6 @@
                     <span class="bg-gray-100 px-3 text-lg font-medium text-gray-700">Full Sourcing Library</span>
                 </div>
             </div>
-        </div>
-
-        <!-- Search and Filter -->
-        <div class="search-container">
-            <input 
-                type="text" 
-                id="focus-search" 
-                class="search-input" 
-                placeholder="🔍 Search focus cards..."
-            >
-            <svg class="search-icon w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
         </div>
 
         <!-- Category Filter Buttons -->
@@ -238,14 +119,6 @@
         let currentDeck = [];
         let currentIndex = 0;
         let categoryCounts = {};
-        let dailyFocusStats = {
-            cardsCompleted: 0,
-            currentStreak: 0,
-            totalActions: 0,
-            badgesEarned: 0,
-            lastVisit: null,
-            visitDates: []
-        };
 
         // --- DOM Elements ---
         const cardOfTheDayContainer = document.getElementById('card-of-the-day-container');
@@ -266,7 +139,6 @@
             }, {});
             categoryCounts['All'] = focusPoints.length;
 
-            // Load progress state
             const savedProgress = localStorage.getItem('sourcingFocusProgress');
             if (savedProgress) {
                 progressState = JSON.parse(savedProgress);
@@ -275,132 +147,10 @@
                     progressState[point.id] = Array(point.actions.length).fill(false);
                 });
             }
-            
-            // Load stats
-            const savedStats = localStorage.getItem('dailyFocusStats');
-            if (savedStats) {
-                dailyFocusStats = { ...dailyFocusStats, ...JSON.parse(savedStats) };
-            }
-            
-            updateStats();
-            checkDailyVisit();
         }
 
         function saveProgress() {
             localStorage.setItem('sourcingFocusProgress', JSON.stringify(progressState));
-            localStorage.setItem('dailyFocusStats', JSON.stringify(dailyFocusStats));
-        }
-        
-        function updateStats() {
-            // Calculate completed cards
-            const completedCards = Object.values(progressState).filter(actions => 
-                actions.every(action => action === true)
-            ).length;
-            
-            // Calculate total completed actions
-            const totalActions = Object.values(progressState).reduce((sum, actions) => 
-                sum + actions.filter(action => action === true).length, 0
-            );
-            
-            dailyFocusStats.cardsCompleted = completedCards;
-            dailyFocusStats.totalActions = totalActions;
-            
-            // Update UI
-            document.getElementById('cards-completed').textContent = completedCards;
-            document.getElementById('current-streak').textContent = dailyFocusStats.currentStreak;
-            document.getElementById('total-actions').textContent = totalActions;
-            document.getElementById('badges-count').textContent = dailyFocusStats.badgesEarned;
-            
-            // Report progress to main hub
-            if (window.parent && window.parent.updateModuleProgress) {
-                const totalCards = focusPoints.length;
-                window.parent.updateModuleProgress('daily-focus', Math.min(completedCards, totalCards));
-            }
-        }
-        
-        function checkDailyVisit() {
-            const today = new Date().toDateString();
-            
-            if (!dailyFocusStats.visitDates.includes(today)) {
-                dailyFocusStats.visitDates.push(today);
-                
-                // Update streak
-                if (dailyFocusStats.lastVisit) {
-                    const lastVisit = new Date(dailyFocusStats.lastVisit);
-                    const todayDate = new Date();
-                    const diffTime = Math.abs(todayDate - lastVisit);
-                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                    
-                    if (diffDays === 1) {
-                        dailyFocusStats.currentStreak++;
-                    } else if (diffDays > 1) {
-                        dailyFocusStats.currentStreak = 1;
-                    }
-                } else {
-                    dailyFocusStats.currentStreak = 1;
-                }
-                
-                dailyFocusStats.lastVisit = today;
-                
-                // Check for streak badges
-                checkStreakBadges();
-                saveProgress();
-                updateStats();
-            }
-        }
-        
-        function checkStreakBadges() {
-            const streak = dailyFocusStats.currentStreak;
-            let newBadge = null;
-            
-            if (streak === 3 && !hasEarnedBadge('3-day-streak')) {
-                newBadge = { id: '3-day-streak', name: '3-Day Streak!', icon: '🔥' };
-            } else if (streak === 7 && !hasEarnedBadge('week-warrior')) {
-                newBadge = { id: 'week-warrior', name: 'Week Warrior!', icon: '⚡' };
-            } else if (streak === 30 && !hasEarnedBadge('month-master')) {
-                newBadge = { id: 'month-master', name: 'Month Master!', icon: '👑' };
-            }
-            
-            if (newBadge) {
-                earnBadge(newBadge);
-            }
-        }
-        
-        function hasEarnedBadge(badgeId) {
-            const badges = JSON.parse(localStorage.getItem('dailyFocusBadges') || '[]');
-            return badges.some(badge => badge.id === badgeId);
-        }
-        
-        function earnBadge(badge) {
-            const badges = JSON.parse(localStorage.getItem('dailyFocusBadges') || '[]');
-            badges.push(badge);
-            localStorage.setItem('dailyFocusBadges', JSON.stringify(badges));
-            
-            dailyFocusStats.badgesEarned = badges.length;
-            showBadgeNotification(badge);
-            updateStats();
-        }
-        
-        function showBadgeNotification(badge) {
-            const notification = document.createElement('div');
-            notification.className = 'badge-notification';
-            notification.innerHTML = `
-                <div class="flex items-center gap-3">
-                    <span style="font-size: 2rem;">${badge.icon}</span>
-                    <div>
-                        <div class="font-bold text-green-600">Badge Earned!</div>
-                        <div class="text-gray-700">${badge.name}</div>
-                    </div>
-                </div>
-            `;
-            
-            document.body.appendChild(notification);
-            
-            setTimeout(() => notification.classList.add('show'), 100);
-            setTimeout(() => {
-                notification.classList.remove('show');
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
         }
 
         // --- Card Creation & UI Updates ---
@@ -495,36 +245,8 @@
             });
 
             updateProgressUI(pointId);
-            updateStats();
-            
-            // Check for completion badge
-            const allCompleted = progressState[pointId].every(action => action === true);
-            if (allCompleted && checkbox.checked) {
-                checkCompletionBadges();
-            }
-            
             saveProgress();
         };
-        
-        function checkCompletionBadges() {
-            const completedCards = Object.values(progressState).filter(actions => 
-                actions.every(action => action === true)
-            ).length;
-            
-            let newBadge = null;
-            
-            if (completedCards === 1 && !hasEarnedBadge('first-completion')) {
-                newBadge = { id: 'first-completion', name: 'First Card Complete!', icon: '🎉' };
-            } else if (completedCards === 10 && !hasEarnedBadge('ten-cards')) {
-                newBadge = { id: 'ten-cards', name: '10 Cards Mastered!', icon: '🌟' };
-            } else if (completedCards === 25 && !hasEarnedBadge('quarter-century')) {
-                newBadge = { id: 'quarter-century', name: '25 Cards Champion!', icon: '🏆' };
-            }
-            
-            if (newBadge) {
-                earnBadge(newBadge);
-            }
-        }
 
         // --- Card of the Day Logic ---
         function renderCardOfTheDay() {
@@ -594,34 +316,6 @@
             });
         }
 
-        // --- Search functionality ---
-        function setupSearch() {
-            const searchInput = document.getElementById('focus-search');
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-                filterFocusCards(searchTerm);
-            });
-        }
-        
-        function filterFocusCards(searchTerm) {
-            if (!searchTerm) {
-                loadDeck(document.querySelector('.filter-button.active')?.dataset.category || 'All');
-                return;
-            }
-            
-            const filtered = focusPoints.filter(point => 
-                point.title.toLowerCase().includes(searchTerm) ||
-                point.quote.toLowerCase().includes(searchTerm) ||
-                point.category.toLowerCase().includes(searchTerm) ||
-                point.actions.some(action => action.toLowerCase().includes(searchTerm))
-            );
-            
-            currentDeck = filtered;
-            currentIndex = 0;
-            showCardInLibrary(currentIndex);
-            updateActiveFilterButton('search');
-        }
-
         // --- Initial Load & Event Listeners ---
         document.addEventListener('DOMContentLoaded', () => {
             fetch('focus.json')
@@ -631,7 +325,6 @@
                     renderCardOfTheDay();
                     populateFilters();
                     loadDeck('All');
-                    setupSearch();
                 })
                 .catch(error => console.error('Error fetching focus points:', error));
 

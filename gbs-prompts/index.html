@@ -211,69 +211,9 @@
           box-shadow: none !important;
         }
 
-        /* Enhanced mobile responsiveness */
-        @media (max-width: 768px) {
-            .quick-links-sidebar {
-                display: none;
-            }
-            #detail-view .w-3\/4 {
-                width: 100% !important;
-                padding-right: 0 !important;
-            }
-            .prompt-block {
-                margin-bottom: 1rem;
-                padding: 1rem;
-            }
-            .copy-btn, .create-gem-btn {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* Progress tracking for prompts */
-        .prompt-usage-tracker {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: white;
-            border: 1px solid #E5E7EB;
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            z-index: 100;
-        }
-        
-        .usage-stat {
-            text-align: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .usage-number {
-            font-size: 1.25rem;
-            font-weight: bold;
-            color: #4A90E2;
-        }
-        
-        .usage-label {
-            font-size: 0.75rem;
-            color: #6B7280;
-        }
-
     </style>
 </head>
 <body class="antialiased">
-
-    <!-- Usage Tracker -->
-    <div class="prompt-usage-tracker">
-        <div class="usage-stat">
-            <div class="usage-number" id="prompts-used">0</div>
-            <div class="usage-label">Prompts Used</div>
-        </div>
-        <div class="usage-stat">
-            <div class="usage-number" id="favorites-count">0</div>
-            <div class="usage-label">Favorites</div>
-        </div>
-    </div>
 
     <!-- =========== HOMEPAGE VIEW =========== -->
     <div id="homepage-view" class="fade-in">
@@ -287,24 +227,11 @@
                 How To Use:
                 <span id="animated-subtitle" class="font-semibold text-[#4A90E2] inline-block"></span>
             </div>
-            
-            <!-- Enhanced Search with Filters -->
-            <div class="mt-8 max-w-2xl mx-auto">
-                <div class="relative mb-4">
-                    <input type="text" id="homepage-search" placeholder="🔍 Search for prompts..." class="w-full p-3 border border-gray-300 rounded-lg text-lg pr-10">
-                    <button id="clear-search-btn" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                
-                <!-- Quick Filter Tags -->
-                <div class="flex flex-wrap justify-center gap-2 mb-4">
-                    <button class="filter-tag active" data-filter="all">All</button>
-                    <button class="filter-tag" data-filter="beginner">Beginner</button>
-                    <button class="filter-tag" data-filter="intermediate">Intermediate</button>
-                    <button class="filter-tag" data-filter="advanced">Advanced</button>
-                    <button class="filter-tag" data-filter="favorites">⭐ Favorites</button>
-                </div>
+            <div class="mt-8 max-w-xl mx-auto relative">
+                <input type="text" id="homepage-search" placeholder="🔍 Search for prompts..." class="w-full p-3 border border-gray-300 rounded-lg text-lg pr-10">
+                <button id="clear-search-btn" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500 hover:text-gray-700">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
         </header>
         <main class="container mx-auto px-4 sm:px-6 lg:px-8 pb-16">
@@ -358,12 +285,6 @@
         let promptData = {};
         let allPrompts = [];
         let lastScrollPosition = 0;
-        let promptStats = {
-            promptsUsed: 0,
-            favoritesCount: 0,
-            favorites: [],
-            usageHistory: []
-        };
 
         /**
          * Flattens the prompt data into a single array for easier searching.
@@ -398,7 +319,6 @@
                 const data = await response.json();
                 promptData = data.promptData;
                 flattenPrompts();
-                loadStats();
                 renderHomepage(); // Initialize UI after data loads
 
                 const promptCount = allPrompts.length;
@@ -438,9 +358,6 @@
                     cycleSubtitles();
                     setInterval(cycleSubtitles, 3000); // Cycle every 3 seconds
                 }
-                
-                setupEnhancedSearch();
-                updateStatsUI();
             } catch (error) {
                 console.error('Failed to load prompts:', error);
                 categoryCardsContainer.innerHTML = `
@@ -452,60 +369,6 @@
                 loadingIndicator.classList.add('hidden');
                 categoryCardsContainer.classList.remove('hidden');
             }
-        }
-        
-        function loadStats() {
-            const saved = localStorage.getItem('promptLibraryStats');
-            if (saved) {
-                promptStats = { ...promptStats, ...JSON.parse(saved) };
-            }
-        }
-        
-        function saveStats() {
-            localStorage.setItem('promptLibraryStats', JSON.stringify(promptStats));
-        }
-        
-        function updateStatsUI() {
-            document.getElementById('prompts-used').textContent = promptStats.promptsUsed;
-            document.getElementById('favorites-count').textContent = promptStats.favoritesCount;
-        }
-        
-        function setupEnhancedSearch() {
-            // Filter tags
-            document.querySelectorAll('.filter-tag').forEach(tag => {
-                tag.addEventListener('click', (e) => {
-                    document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-                    e.target.classList.add('active');
-                    
-                    const filter = e.target.dataset.filter;
-                    if (filter === 'favorites') {
-                        showFavorites();
-                    } else {
-                        filterByDifficulty(filter);
-                    }
-                });
-            });
-        }
-        
-        function filterByDifficulty(difficulty) {
-            if (difficulty === 'all') {
-                renderHomepage();
-                return;
-            }
-            
-            const filtered = allPrompts.filter(prompt => 
-                prompt.difficulty === difficulty
-            );
-            
-            renderSearchResults(filtered);
-        }
-        
-        function showFavorites() {
-            const favorites = allPrompts.filter(prompt => 
-                promptStats.favorites.includes(prompt.id)
-            );
-            
-            renderSearchResults(favorites);
         }
 
         // --- DOM ELEMENTS ---
@@ -630,8 +493,6 @@
 
             promptEl.className = isSearchResult ? 'prompt-block p-4' : 'mb-8';
 
-            const isFavorite = promptStats.favorites.includes(prompt.id);
-            
             promptEl.innerHTML = `
                 <div class="flex justify-between items-start mb-3">
                     <div class="flex-1">
@@ -642,10 +503,7 @@
                         <h3 class="${titleClass} font-semibold main-heading">${highlightedTitle}</h3>
                     </div>
                     <div class="flex-shrink-0 ml-4">
-                        <button class="favorite-btn text-sm py-1 px-3 rounded-md ${isFavorite ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'} hover:bg-yellow-200 mr-2" data-prompt-id="${prompt.id}">
-                            ${isFavorite ? '⭐' : '☆'}
-                        </button>
-                        <button class="copy-btn text-sm py-1 px-3 rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200" data-prompt-content="${escapedContent}" data-prompt-id="${prompt.id}">
+                        <button class="copy-btn text-sm py-1 px-3 rounded-md bg-indigo-100 text-indigo-700 hover:bg-indigo-200" data-prompt-content="${escapedContent}">
                             Copy
                         </button>
                         <button class="create-gem-btn text-sm py-1 px-3 rounded-md bg-green-100 text-green-700 hover:bg-green-200 ml-2 hidden" data-prompt-content="${escapedContent}">
@@ -664,49 +522,8 @@
                 ${quickStartSection}
                 ${expectedOutputSection}
             `;
-            
-            // Add event listeners
-            const favoriteBtn = promptEl.querySelector('.favorite-btn');
-            const copyBtn = promptEl.querySelector('.copy-btn');
-            
-            favoriteBtn.addEventListener('click', () => toggleFavorite(prompt.id, favoriteBtn));
-            copyBtn.addEventListener('click', () => trackPromptUsage(prompt.id));
 
             return promptEl;
-        }
-        
-        function toggleFavorite(promptId, button) {
-            const index = promptStats.favorites.indexOf(promptId);
-            
-            if (index === -1) {
-                promptStats.favorites.push(promptId);
-                button.textContent = '⭐';
-                button.className = 'favorite-btn text-sm py-1 px-3 rounded-md bg-yellow-100 text-yellow-700 hover:bg-yellow-200 mr-2';
-            } else {
-                promptStats.favorites.splice(index, 1);
-                button.textContent = '☆';
-                button.className = 'favorite-btn text-sm py-1 px-3 rounded-md bg-gray-100 text-gray-700 hover:bg-yellow-200 mr-2';
-            }
-            
-            promptStats.favoritesCount = promptStats.favorites.length;
-            saveStats();
-            updateStatsUI();
-        }
-        
-        function trackPromptUsage(promptId) {
-            promptStats.promptsUsed++;
-            promptStats.usageHistory.push({
-                promptId,
-                timestamp: new Date().toISOString()
-            });
-            
-            saveStats();
-            updateStatsUI();
-            
-            // Report to main hub
-            if (window.parent && window.parent.updateModuleProgress) {
-                window.parent.updateModuleProgress('gbs-prompts', Math.min(promptStats.promptsUsed, 10));
-            }
         }
 
         /**

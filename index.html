@@ -1,40 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Randstad GBS - AI & Sourcing Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="shared/hub-button.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         .google-sans {
             font-family: 'Google Sans', sans-serif;
         }
-
         body {
             font-family: 'Roboto', sans-serif;
         }
-
         .hub-card {
             border: 1px solid #dadce0;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             position: relative;
         }
-
         .hub-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07), 0 3px 6px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.07), 0 3px 6px rgba(0,0,0,0.05);
         }
-
         .hub-card h3 {
-            color: #1967d2;
-            /* Google Blue */
+            color: #1967d2; /* Google Blue */
         }
-
+        
         /* Progress tracking styles */
         .progress-ring {
             position: absolute;
@@ -43,19 +35,17 @@
             width: 60px;
             height: 60px;
         }
-
         .progress-ring-circle {
             transition: stroke-dasharray 0.35s;
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
-
         .progress-text {
             font-size: 12px;
             font-weight: 600;
             fill: #1967d2;
         }
-
+        
         /* Badge styles */
         .badge {
             display: inline-flex;
@@ -66,29 +56,16 @@
             font-weight: 500;
             margin: 2px;
         }
-
-        .badge-new {
-            background: #e8f0fe;
-            color: #1967d2;
-        }
-
-        .badge-completed {
-            background: #e6f4ea;
-            color: #137333;
-        }
-
-        .badge-in-progress {
-            background: #fef7e0;
-            color: #ea8600;
-        }
-
+        .badge-new { background: #e8f0fe; color: #1967d2; }
+        .badge-completed { background: #e6f4ea; color: #137333; }
+        .badge-in-progress { background: #fef7e0; color: #ea8600; }
+        
         /* Search and filter styles */
         .search-container {
             position: relative;
             max-width: 500px;
             margin: 0 auto 2rem;
         }
-
         .filter-tags {
             display: flex;
             flex-wrap: wrap;
@@ -96,7 +73,6 @@
             gap: 8px;
             margin-bottom: 2rem;
         }
-
         .filter-tag {
             padding: 6px 12px;
             border: 1px solid #dadce0;
@@ -107,14 +83,12 @@
             transition: all 0.2s ease;
             font-size: 14px;
         }
-
-        .filter-tag:hover,
-        .filter-tag.active {
+        .filter-tag:hover, .filter-tag.active {
             background: #1967d2;
             color: white;
             border-color: #1967d2;
         }
-
+        
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .progress-ring {
@@ -123,16 +97,14 @@
                 top: 12px;
                 right: 12px;
             }
-
             .hub-card {
                 padding: 1rem;
             }
-
             .filter-tags {
                 padding: 0 1rem;
             }
         }
-
+        
         /* Streak indicator */
         .streak-indicator {
             position: fixed;
@@ -142,17 +114,15 @@
             border: 1px solid #dadce0;
             border-radius: 12px;
             padding: 12px 16px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             z-index: 100;
         }
-
         .streak-flame {
             color: #ea8600;
             font-size: 18px;
         }
     </style>
 </head>
-
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Streak Indicator -->
@@ -170,9 +140,8 @@
 
         <header class="text-center mb-12">
             <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900">Randstad GBS Learning Hub</h1>
-            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">A central portal for our AI training programs,
-                sourcing tools, and interactive workshops.</p>
-
+            <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">A central portal for our AI training programs, sourcing tools, and interactive workshops.</p>
+            
             <!-- Overall Progress Summary -->
             <div class="mt-8 bg-white rounded-xl p-6 max-w-2xl mx-auto border border-gray-200">
                 <h3 class="google-sans text-lg font-semibold mb-4">Your Learning Progress</h3>
@@ -200,12 +169,14 @@
         <!-- Search and Filters -->
         <div class="search-container">
             <div class="relative">
-                <input type="text" id="hub-search" placeholder="🔍 Search modules, topics, or skills..."
-                    class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <input 
+                    type="text" 
+                    id="hub-search" 
+                    placeholder="🔍 Search modules, topics, or skills..."
+                    class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
             </div>
         </div>
@@ -220,431 +191,43 @@
         </div>
 
         <main>
-            <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto"></div>
+            <div id="modules-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
 
-            <a href="/rpo-training/" class="hub-card bg-white p-8 rounded-xl block" data-module="rpo-training"
-                data-level="intermediate" data-type="training">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#1967d2" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" data-module="rpo-training" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text">0%</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge badge-intermediate">Intermediate</span>
-                        <span class="badge badge-new" id="rpo-badge">New</span>
-                    </div>
+                <a href="/rpo-training/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">RPO AI Acceleration Program</h3>
-                    <p class="text-gray-600">The complete, multi-phase training curriculum for all RPO team members,
-                        from AI foundations to leadership strategy.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>📚 7 Modules</span> • <span>⏱️ ~4 hours</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="/gbs-ai-workshop/" class="hub-card bg-white p-8 rounded-xl block" data-module="gbs-ai-workshop"
-                data-level="advanced" data-type="training">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#1967d2" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" data-module="gbs-ai-workshop" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text">0%</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge badge-advanced">Advanced</span>
-                        <span class="badge badge-new" id="workshop-badge">New</span>
-                    </div>
+                    <p class="text-gray-600">The complete, multi-phase training curriculum for all RPO team members, from AI foundations to leadership strategy.</p>
+                </a>
+                
+                <a href="/gbs-ai-workshop/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">GBS AI Workshop for Leaders</h3>
-                    <p class="text-gray-600">An interactive training SPA for GBS leaders, complete with prompt
-                        libraries, simulators, and case studies.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>🎯 11 Sections</span> • <span>⏱️ ~3 hours</span>
-                    </div>
-                </div>
-            </a>
+                    <p class="text-gray-600">An interactive training SPA for GBS leaders, complete with prompt libraries, simulators, and case studies.</p>
+                </a>
 
-            <a href="/daily-focus/" class="hub-card bg-white p-8 rounded-xl block" data-module="daily-focus"
-                data-level="beginner" data-type="tools">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#1967d2" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" data-module="daily-focus" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text">0%</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge badge-beginner">Beginner</span>
-                        <span class="badge badge-new" id="focus-badge">New</span>
-                    </div>
+                <a href="/daily-focus/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">Daily Sourcing Focus</h3>
-                    <p class="text-gray-600">A daily micro-coaching tool with actionable focus cards designed to sharpen
-                        the skills of our talent sourcers.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>📋 Daily Cards</span> • <span>⏱️ ~15 min/day</span>
-                    </div>
-                </div>
-            </a>
+                    <p class="text-gray-600">A daily micro-coaching tool with actionable focus cards designed to sharpen the skills of our talent sourcers.</p>
+                </a>
 
-            <a href="/gbs-prompts/" class="hub-card bg-white p-8 rounded-xl block" data-module="gbs-prompts"
-                data-level="intermediate" data-type="tools">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#1967d2" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" data-module="gbs-prompts" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text">0%</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge badge-intermediate">Intermediate</span>
-                        <span class="badge badge-new" id="prompts-badge">New</span>
-                    </div>
+                <a href="/gbs-prompts/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">GBS Prompt Library</h3>
-                    <p class="text-gray-600">A comprehensive and searchable library of expert prompts designed to
-                        accelerate daily tasks for GBS professionals.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>💡 200+ Prompts</span> • <span>⏱️ Browse anytime</span>
-                    </div>
-                </div>
-            </a>
+                    <p class="text-gray-600">A comprehensive and searchable library of expert prompts designed to accelerate daily tasks for GBS professionals.</p>
+                </a>
 
-            <a href="/knowledge-content/" class="hub-card bg-white p-8 rounded-xl block" data-module="knowledge-content"
-                data-level="beginner" data-type="training">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#1967d2" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" data-module="knowledge-content" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text">0%</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge badge-beginner">Beginner</span>
-                        <span class="badge badge-new" id="knowledge-badge">New</span>
-                    </div>
+                <a href="/knowledge-content/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">Knowledge Content</h3>
-                    <p class="text-gray-600">Access a wealth of knowledge content including Gemini training videos, help
-                        articles, and online courses.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>🎥 Video Library</span> • <span>⏱️ Self-paced</span>
-                    </div>
-                </div>
-            </a>
+                    <p class="text-gray-600">Access a wealth of knowledge content here.</p>
+                </a>
 
-            <a href="/sourcing-workshop/" class="hub-card bg-white p-8 rounded-xl block opacity-60"
-                data-module="sourcing-workshop" data-level="advanced" data-type="training">
-                <!-- Progress Ring -->
-                <svg class="progress-ring" viewBox="0 0 60 60">
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4" />
-                    <circle cx="30" cy="30" r="25" fill="none" stroke="#e5e7eb" stroke-width="4"
-                        stroke-dasharray="0 157" class="progress-ring-circle" />
-                    <text x="30" y="35" text-anchor="middle" class="progress-text" fill="#9ca3af">Soon</text>
-                </svg>
-
-                <div class="pr-16">
-                    <div class="mb-2">
-                        <span class="badge" style="background: #f3f4f6; color: #6b7280;">Coming Soon</span>
-                    </div>
+                <a href="/sourcing-workshop/" class="hub-card bg-white p-8 rounded-xl block">
                     <h3 class="google-sans text-2xl font-bold mb-2">Sourcing Workshop</h3>
-                    <p class="text-gray-600">An in-depth workshop dedicated to advanced sourcing techniques, market
-                        intelligence, and candidate engagement.</p>
-                    <div class="mt-3 text-sm text-gray-500">
-                        <span>🚀 Coming Q2 2025</span>
-                    </div>
-                </div>
-            </a>
+                    <p class="text-gray-600">An in-depth workshop dedicated to advanced sourcing techniques, market intelligence, and candidate engagement. (Coming Soon)</p>
+                </a>
 
+            </div>
+        </main>
     </div>
-    </main>
-    </div>
-
-    <script>
-        // Progress tracking and gamification system
-        class LearningHub {
-            constructor() {
-                this.modules = [
-                    { id: 'rpo-training', name: 'RPO AI Acceleration Program', totalSections: 7, estimatedHours: 4 },
-                    { id: 'gbs-ai-workshop', name: 'GBS AI Workshop for Leaders', totalSections: 11, estimatedHours: 3 },
-                    { id: 'daily-focus', name: 'Daily Sourcing Focus', totalSections: 1, estimatedHours: 0.25 },
-                    { id: 'gbs-prompts', name: 'GBS Prompt Library', totalSections: 1, estimatedHours: 1 },
-                    { id: 'knowledge-content', name: 'Knowledge Content', totalSections: 8, estimatedHours: 2 }
-                ];
-
-                this.badges = {
-                    'first-visit': { name: 'Welcome!', icon: '👋', description: 'First visit to the hub' },
-                    'module-starter': { name: 'Getting Started', icon: '🚀', description: 'Started first module' },
-                    'daily-learner': { name: 'Daily Learner', icon: '📚', description: 'Visited 3 days in a row' },
-                    'module-completer': { name: 'Finisher', icon: '✅', description: 'Completed first module' },
-                    'prompt-explorer': { name: 'Prompt Explorer', icon: '💡', description: 'Used prompt library' },
-                    'streak-keeper': { name: 'Streak Keeper', icon: '🔥', description: '7-day learning streak' }
-                };
-
-                this.init();
-            }
-
-            init() {
-                this.loadProgress();
-                this.updateUI();
-                this.setupEventListeners();
-                this.checkBadges();
-                this.updateStreak();
-            }
-
-            loadProgress() {
-                const saved = localStorage.getItem('hubProgress');
-                this.progress = saved ? JSON.parse(saved) : {
-                    modules: {},
-                    badges: [],
-                    streak: 0,
-                    lastVisit: null,
-                    totalTimeSpent: 0,
-                    visits: []
-                };
-
-                // Record today's visit
-                const today = new Date().toDateString();
-                if (!this.progress.visits.includes(today)) {
-                    this.progress.visits.push(today);
-                    this.saveProgress();
-                }
-            }
-
-            saveProgress() {
-                localStorage.setItem('hubProgress', JSON.stringify(this.progress));
-            }
-
-            updateModuleProgress(moduleId, completedSections) {
-                const module = this.modules.find(m => m.id === moduleId);
-                if (!module) return;
-
-                this.progress.modules[moduleId] = {
-                    completed: completedSections,
-                    total: module.totalSections,
-                    percentage: Math.round((completedSections / module.totalSections) * 100)
-                };
-
-                this.saveProgress();
-                this.updateUI();
-                this.checkBadges();
-            }
-
-            updateUI() {
-                // Update overall progress
-                const totalModules = this.modules.length;
-                const completedModules = Object.values(this.progress.modules).filter(m => m.percentage === 100).length;
-                const overallProgress = Math.round((completedModules / totalModules) * 100);
-
-                document.getElementById('total-progress').textContent = `${overallProgress}%`;
-                document.getElementById('completed-modules').textContent = completedModules;
-                document.getElementById('badges-earned').textContent = this.progress.badges.length;
-                document.getElementById('hours-spent').textContent = `${this.progress.totalTimeSpent}h`;
-
-                // Update individual module progress rings
-                this.modules.forEach(module => {
-                    const moduleProgress = this.progress.modules[module.id];
-                    const percentage = moduleProgress ? moduleProgress.percentage : 0;
-                    const circumference = 2 * Math.PI * 25; // radius = 25
-                    const strokeDasharray = `${(percentage / 100) * circumference} ${circumference}`;
-
-                    const circle = document.querySelector(`[data-module="${module.id}"]`);
-                    const text = circle?.parentElement.querySelector('.progress-text');
-
-                    if (circle) {
-                        circle.style.strokeDasharray = strokeDasharray;
-                    }
-                    if (text) {
-                        text.textContent = `${percentage}%`;
-                    }
-
-                    // Update badge
-                    const badge = document.getElementById(`${module.id.split('-')[0]}-badge`);
-                    if (badge && percentage > 0) {
-                        badge.textContent = percentage === 100 ? 'Completed' : 'In Progress';
-                        badge.className = `badge ${percentage === 100 ? 'badge-completed' : 'badge-in-progress'}`;
-                    }
-                });
-            }
-
-            updateStreak() {
-                const today = new Date();
-                const yesterday = new Date(today);
-                yesterday.setDate(yesterday.getDate() - 1);
-
-                const todayStr = today.toDateString();
-                const yesterdayStr = yesterday.toDateString();
-
-                if (this.progress.visits.includes(todayStr)) {
-                    if (this.progress.visits.includes(yesterdayStr) || this.progress.streak === 0) {
-                        this.progress.streak = Math.max(1, this.progress.streak + (this.progress.lastVisit !== todayStr ? 1 : 0));
-                    }
-                } else {
-                    this.progress.streak = 0;
-                }
-
-                this.progress.lastVisit = todayStr;
-                document.getElementById('streak-count').textContent = `${this.progress.streak} day streak`;
-                this.saveProgress();
-            }
-
-            checkBadges() {
-                const newBadges = [];
-
-                // First visit badge
-                if (!this.progress.badges.includes('first-visit')) {
-                    newBadges.push('first-visit');
-                }
-
-                // Module starter badge
-                if (!this.progress.badges.includes('module-starter') &&
-                    Object.keys(this.progress.modules).length > 0) {
-                    newBadges.push('module-starter');
-                }
-
-                // Daily learner badge
-                if (!this.progress.badges.includes('daily-learner') &&
-                    this.progress.streak >= 3) {
-                    newBadges.push('daily-learner');
-                }
-
-                // Module completer badge
-                if (!this.progress.badges.includes('module-completer') &&
-                    Object.values(this.progress.modules).some(m => m.percentage === 100)) {
-                    newBadges.push('module-completer');
-                }
-
-                // Streak keeper badge
-                if (!this.progress.badges.includes('streak-keeper') &&
-                    this.progress.streak >= 7) {
-                    newBadges.push('streak-keeper');
-                }
-
-                // Award new badges
-                newBadges.forEach(badgeId => {
-                    this.progress.badges.push(badgeId);
-                    this.showBadgeNotification(badgeId);
-                });
-
-                if (newBadges.length > 0) {
-                    this.saveProgress();
-                }
-            }
-
-            showBadgeNotification(badgeId) {
-                const badge = this.badges[badgeId];
-                if (!badge) return;
-
-                const notification = document.createElement('div');
-                notification.className = 'fixed top-4 right-4 bg-white border border-gray-200 rounded-lg p-4 shadow-lg z-50 transform translate-x-full transition-transform duration-300';
-                notification.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <span class="text-2xl">${badge.icon}</span>
-                        <div>
-                            <div class="font-semibold text-gray-900">Badge Earned!</div>
-                            <div class="text-sm text-gray-600">${badge.name}</div>
-                        </div>
-                    </div>
-                `;
-
-                document.body.appendChild(notification);
-
-                // Animate in
-                setTimeout(() => {
-                    notification.style.transform = 'translateX(0)';
-                }, 100);
-
-                // Remove after 3 seconds
-                setTimeout(() => {
-                    notification.style.transform = 'translateX(100%)';
-                    setTimeout(() => notification.remove(), 300);
-                }, 3000);
-            }
-
-            setupEventListeners() {
-                // Search functionality
-                const searchInput = document.getElementById('hub-search');
-                searchInput.addEventListener('input', (e) => this.filterModules(e.target.value));
-
-                // Filter tags
-                document.querySelectorAll('.filter-tag').forEach(tag => {
-                    tag.addEventListener('click', (e) => {
-                        document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
-                        e.target.classList.add('active');
-                        this.filterByTag(e.target.dataset.filter);
-                    });
-                });
-
-                // Track module clicks
-                document.querySelectorAll('.hub-card[data-module]').forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        const moduleId = card.dataset.module;
-                        this.trackModuleVisit(moduleId);
-                    });
-                });
-            }
-
-            filterModules(searchTerm) {
-                const cards = document.querySelectorAll('.hub-card[data-module]');
-                const term = searchTerm.toLowerCase();
-
-                cards.forEach(card => {
-                    const title = card.querySelector('h3').textContent.toLowerCase();
-                    const description = card.querySelector('p').textContent.toLowerCase();
-                    const matches = title.includes(term) || description.includes(term);
-
-                    card.style.display = matches ? 'block' : 'none';
-                });
-            }
-
-            filterByTag(filter) {
-                const cards = document.querySelectorAll('.hub-card[data-module]');
-
-                cards.forEach(card => {
-                    if (filter === 'all') {
-                        card.style.display = 'block';
-                    } else {
-                        const matches = card.dataset.level === filter || card.dataset.type === filter;
-                        card.style.display = matches ? 'block' : 'none';
-                    }
-                });
-            }
-
-            trackModuleVisit(moduleId) {
-                // Simulate progress - in real implementation, this would come from the actual modules
-                const currentProgress = this.progress.modules[moduleId] || { completed: 0, total: 1, percentage: 0 };
-
-                // Add some time spent
-                this.progress.totalTimeSpent += 0.25;
-
-                // Mark as started if not already
-                if (currentProgress.percentage === 0) {
-                    this.updateModuleProgress(moduleId, 1);
-                }
-            }
-        }
-
-        // Initialize the learning hub
-        document.addEventListener('DOMContentLoaded', () => {
-            window.learningHub = new LearningHub();
-        });
-
-        // Expose function for modules to report progress
-        window.updateModuleProgress = (moduleId, completedSections) => {
-            if (window.learningHub) {
-                window.learningHub.updateModuleProgress(moduleId, completedSections);
-            }
-        };
-    </script>
 </body>
 
 </html>
+
+
