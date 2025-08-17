@@ -159,3 +159,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set up initial page view
     navigateTo('main-page');
 });
+ 
