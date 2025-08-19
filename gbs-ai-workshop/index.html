@@ -282,22 +282,72 @@
                 </div>
 
                 <!-- Center: Desktop Navigation -->
-                <div class="hidden lg:flex items-center space-x-2 flex-1 justify-center max-w-4xl mx-4">
-                    <a href="#why" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The Why</a>
-                    <a href="#how" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The How</a>
-                    <a href="#best-practices"
-                        class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Best Practices</a>
-                    <a href="#ai-glossary" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">AI
-                        Glossary</a>
-                    <a href="#case-studies" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Case
-                        Studies</a>
-                    <a href="#team-leadership"
-                        class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Team Leadership</a>
+                <div class="hidden lg:flex items-center space-x-3 flex-1 justify-center max-w-4xl mx-4">
+                    <!-- Learning Dropdown -->
+                    <div class="relative" id="learning-dropdown">
+                        <button id="learning-dropdown-btn"
+                            class="nav-link inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
+                            <span>Learning</span>
+                            <svg class="ml-1 -mr-1 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="learning-dropdown-menu"
+                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden transition ease-out duration-100 transform opacity-0 scale-95">
+                            <div class="py-1" role="menu" aria-orientation="vertical"
+                                aria-labelledby="learning-dropdown-btn">
+                                <a href="#why"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">The Why</a>
+                                <a href="#how"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">The How</a>
+                                <a href="#best-practices"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">Best Practices</a>
+                                <a href="#ai-glossary"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">AI Glossary</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Resources Dropdown -->
+                    <div class="relative" id="resources-dropdown">
+                        <button id="resources-dropdown-btn"
+                            class="nav-link inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
+                            <span>Resources</span>
+                            <svg class="ml-1 -mr-1 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <div id="resources-dropdown-menu"
+                            class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden transition ease-out duration-100 transform opacity-0 scale-95">
+                            <div class="py-1" role="menu" aria-orientation="vertical"
+                                aria-labelledby="resources-dropdown-btn">
+                                <a href="#case-studies"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">Case Studies</a>
+                                <a href="#team-leadership"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">Team Leadership</a>
+                                <a href="#now"
+                                    class="nav-dropdown-item block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                    role="menuitem">The Now</a>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Tools Dropdown -->
                     <div class="relative" id="tools-dropdown">
                         <button id="tools-dropdown-btn"
-                            class="nav-link inline-flex items-center px-2 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
+                            class="nav-link inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
                             <span>Tools</span>
                             <svg class="ml-1 -mr-1 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -331,8 +381,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <a href="#now" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The Now</a>
                 </div>
 
                 <!-- Right: Back To Hub Button and Mobile Menu -->
@@ -1896,6 +1944,64 @@
             // Close dropdown when clicking outside
             window.addEventListener('click', (e) => {
                 if (!toolsDropdown.contains(e.target)) {
+                    menu.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => menu.classList.add('hidden'), 100);
+                }
+            });
+            // Close dropdown when an item is clicked
+            menu.addEventListener('click', () => {
+                menu.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => menu.classList.add('hidden'), 100);
+            });
+        }
+
+        // --- Learning Dropdown Logic ---
+        const learningDropdown = document.getElementById('learning-dropdown');
+        if (learningDropdown) {
+            const btn = document.getElementById('learning-dropdown-btn');
+            const menu = document.getElementById('learning-dropdown-menu');
+            btn.addEventListener('click', () => {
+                const isHidden = menu.classList.contains('hidden');
+                if (isHidden) {
+                    menu.classList.remove('hidden', 'opacity-0', 'scale-95');
+                    menu.classList.add('opacity-100', 'scale-100');
+                } else {
+                    menu.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => menu.classList.add('hidden'), 100);
+                }
+            });
+            // Close dropdown when clicking outside
+            window.addEventListener('click', (e) => {
+                if (!learningDropdown.contains(e.target)) {
+                    menu.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => menu.classList.add('hidden'), 100);
+                }
+            });
+            // Close dropdown when an item is clicked
+            menu.addEventListener('click', () => {
+                menu.classList.add('opacity-0', 'scale-95');
+                setTimeout(() => menu.classList.add('hidden'), 100);
+            });
+        }
+
+        // --- Resources Dropdown Logic ---
+        const resourcesDropdown = document.getElementById('resources-dropdown');
+        if (resourcesDropdown) {
+            const btn = document.getElementById('resources-dropdown-btn');
+            const menu = document.getElementById('resources-dropdown-menu');
+            btn.addEventListener('click', () => {
+                const isHidden = menu.classList.contains('hidden');
+                if (isHidden) {
+                    menu.classList.remove('hidden', 'opacity-0', 'scale-95');
+                    menu.classList.add('opacity-100', 'scale-100');
+                } else {
+                    menu.classList.add('opacity-0', 'scale-95');
+                    setTimeout(() => menu.classList.add('hidden'), 100);
+                }
+            });
+            // Close dropdown when clicking outside
+            window.addEventListener('click', (e) => {
+                if (!resourcesDropdown.contains(e.target)) {
                     menu.classList.add('opacity-0', 'scale-95');
                     setTimeout(() => menu.classList.add('hidden'), 100);
                 }
