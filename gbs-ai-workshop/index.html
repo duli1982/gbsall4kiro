@@ -275,30 +275,31 @@
     <header class="bg-white/80 backdrop-blur-lg fixed top-0 left-0 right-0 z-50 shadow-sm">
         <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <div class="flex items-center">
+                <!-- Left: Brand -->
+                <div class="flex items-center flex-shrink-0">
                     <span class="text-xl font-bold text-[#4A90E2]">Randstad GBS</span>
                     <span class="ml-2 text-xl font-light text-gray-600 hidden sm:inline">| Gemini for Leaders</span>
                 </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <a href="#why" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">The Why</a>
-                    <a href="#how" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">The How</a>
+                <!-- Center: Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-2 flex-1 justify-center max-w-4xl mx-4">
+                    <a href="#why" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The Why</a>
+                    <a href="#how" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The How</a>
                     <a href="#best-practices"
-                        class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Best Practices</a>
-                    <a href="#ai-glossary" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">AI
+                        class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Best Practices</a>
+                    <a href="#ai-glossary" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">AI
                         Glossary</a>
-                    <a href="#case-studies" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Case
+                    <a href="#case-studies" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Case
                         Studies</a>
                     <a href="#team-leadership"
-                        class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">Team Leadership</a>
+                        class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Team Leadership</a>
 
                     <!-- Tools Dropdown -->
                     <div class="relative" id="tools-dropdown">
                         <button id="tools-dropdown-btn"
-                            class="nav-link inline-flex items-center px-3 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
+                            class="nav-link inline-flex items-center px-2 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
                             <span>Tools</span>
-                            <svg class="ml-2 -mr-1 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="ml-1 -mr-1 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -331,20 +332,23 @@
                         </div>
                     </div>
 
-                    <a href="#now" class="nav-link px-3 py-2 rounded-md text-sm font-medium text-gray-700">The Now</a>
+                    <a href="#now" class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">The Now</a>
                 </div>
 
-                <!-- Back To Hub Button (Desktop) -->
-                <a href="../index.html" class="hub-button hidden md:inline-flex">Back To Hub</a>
+                <!-- Right: Back To Hub Button and Mobile Menu -->
+                <div class="flex items-center space-x-2 flex-shrink-0">
+                    <!-- Back To Hub Button (Desktop) -->
+                    <a href="../index.html" class="hub-button hidden md:inline-flex">Back To Hub</a>
 
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" class="mobile-menu-button md:hidden">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-btn" class="mobile-menu-button lg:hidden">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </nav>
     </header>
