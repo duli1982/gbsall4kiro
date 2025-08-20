@@ -48,10 +48,33 @@ function initBackToTopButton() {
  * Main function to set up the GBS AI Workshop page.
  * This function is the entry point for all JavaScript on the page.
  */
+/**
+ * Registers the service worker.
+ */
+function registerServiceWorker() {
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register(new URL('../shared/scripts/sw.js', import.meta.url), { type: 'module' })
+        .then(registration => {
+          console.log('ServiceWorker registration successful with scope: ', registration.scope);
+        })
+        .catch(error => {
+          console.log('ServiceWorker registration failed: ', error);
+        });
+    });
+  }
+}
+
+
+/**
+ * Main function to set up the GBS AI Workshop page.
+ * This function is the entry point for all JavaScript on the page.
+ */
 function main() {
   try {
     initComponents();
     initBackToTopButton();
+    registerServiceWorker();
     // NOTE: Other page-specific logic (like charts, simulators, etc.)
     // will be progressively moved from the inline script to this file or other modules.
     console.log("GBS AI Workshop page scripts initialized successfully.");
