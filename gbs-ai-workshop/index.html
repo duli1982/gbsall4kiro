@@ -295,8 +295,8 @@
                         class="nav-link px-2 py-2 rounded-md text-sm font-medium text-gray-700">Team Leadership</a>
 
                     <!-- Tools Dropdown -->
-                    <div class="relative" id="tools-dropdown">
-                        <button id="tools-dropdown-btn"
+                    <div class="relative" data-dropdown>
+                        <button data-dropdown-button
                             class="nav-link inline-flex items-center px-2 py-2 rounded-md text-sm font-medium text-gray-700 focus:outline-none">
                             <span>Tools</span>
                             <svg class="ml-1 -mr-1 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -306,7 +306,7 @@
                                     clip-rule="evenodd" />
                             </svg>
                         </button>
-                        <div id="tools-dropdown-menu"
+                        <div data-dropdown-menu
                             class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden transition ease-out duration-100 transform opacity-0 scale-95">
                             <div class="py-1" role="menu" aria-orientation="vertical"
                                 aria-labelledby="tools-dropdown-btn">
@@ -341,7 +341,7 @@
                     <a href="../index.html" class="hub-button hidden md:inline-flex">Back To Hub</a>
 
                     <!-- Mobile menu button -->
-                    <button id="mobile-menu-btn" class="mobile-menu-button lg:hidden">
+                    <button data-mobile-menu-button class="mobile-menu-button lg:hidden">
                         <span class="sr-only">Open main menu</span>
                         <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -354,16 +354,16 @@
     </header>
 
     <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+    <div data-mobile-menu-overlay class="mobile-menu-overlay"></div>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="mobile-menu">
+    <div data-mobile-menu class="mobile-menu">
         <div class="mobile-menu-header">
             <div>
                 <span class="text-lg font-bold text-[#4A90E2]">Randstad GBS</span>
                 <div class="text-sm text-gray-600">Gemini for Leaders</div>
             </div>
-            <button id="mobile-menu-close" class="mobile-menu-close">
+            <button data-mobile-menu-close class="mobile-menu-close">
                 <span class="sr-only">Close menu</span>
                 <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -372,25 +372,25 @@
         </div>
 
         <nav class="mobile-menu-nav">
-            <a href="../index.html" class="mobile-menu-item">🏠 Back To Hub</a>
+            <a href="../index.html" data-mobile-menu-item class="mobile-menu-item">🏠 Back To Hub</a>
 
             <div class="mobile-menu-section">Learning Sections</div>
-            <a href="#why" class="mobile-menu-item">The Why</a>
-            <a href="#how" class="mobile-menu-item">The How</a>
-            <a href="#best-practices" class="mobile-menu-item">Best Practices</a>
-            <a href="#ai-glossary" class="mobile-menu-item">AI Glossary</a>
-            <a href="#case-studies" class="mobile-menu-item">Case Studies</a>
-            <a href="#team-leadership" class="mobile-menu-item">Team Leadership</a>
-            <a href="#now" class="mobile-menu-item">The Now</a>
+            <a href="#why" data-mobile-menu-item class="mobile-menu-item">The Why</a>
+            <a href="#how" data-mobile-menu-item class="mobile-menu-item">The How</a>
+            <a href="#best-practices" data-mobile-menu-item class="mobile-menu-item">Best Practices</a>
+            <a href="#ai-glossary" data-mobile-menu-item class="mobile-menu-item">AI Glossary</a>
+            <a href="#case-studies" data-mobile-menu-item class="mobile-menu-item">Case Studies</a>
+            <a href="#team-leadership" data-mobile-menu-item class="mobile-menu-item">Team Leadership</a>
+            <a href="#now" data-mobile-menu-item class="mobile-menu-item">The Now</a>
 
             <div class="mobile-menu-section">Interactive Tools</div>
             <div class="mobile-tools-submenu">
-                <a href="#what" class="mobile-menu-item">Prompt Library</a>
-                <a href="#builder" class="mobile-menu-item">Prompt Builder</a>
-                <a href="#reverse-prompt" class="mobile-menu-item">Reverse Prompt</a>
-                <a href="#my-library" class="mobile-menu-item">My Library</a>
-                <a href="#simulator" class="mobile-menu-item">Scenario Simulator</a>
-                <a href="#my-day" class="mobile-menu-item">My Day with AI</a>
+                <a href="#what" data-mobile-menu-item class="mobile-menu-item">Prompt Library</a>
+                <a href="#builder" data-mobile-menu-item class="mobile-menu-item">Prompt Builder</a>
+                <a href="#reverse-prompt" data-mobile-menu-item class="mobile-menu-item">Reverse Prompt</a>
+                <a href="#my-library" data-mobile-menu-item class="mobile-menu-item">My Library</a>
+                <a href="#simulator" data-mobile-menu-item class="mobile-menu-item">Scenario Simulator</a>
+                <a href="#my-day" data-mobile-menu-item class="mobile-menu-item">My Day with AI</a>
             </div>
         </nav>
     </div>
@@ -1358,6 +1358,9 @@
 
     </main>
 
+    <script type="module" src="main.js"></script>
+
+    <!--
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -2463,3 +2466,4 @@
 </body>
 
 </html>
+-->
