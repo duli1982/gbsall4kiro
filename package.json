@@ -5,7 +5,8 @@
   "scripts": {
     "start": "npx parcel ./*.html gbs-ai-workshop/*.html gbs-prompts/*.html rpo-training/*.html daily-focus/*.html about-us/*.html knowledge-content/*.html",
     "build": "npx parcel build ./*.html gbs-ai-workshop/*.html gbs-prompts/*.html rpo-training/*.html daily-focus/*.html about-us/*.html knowledge-content/*.html --dist-dir dist",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx vitest",
+    "test:ui": "npx vitest --ui"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,11 @@
   },
   "homepage": "https://github.com/duli1982/gbsall4kiro#readme",
   "devDependencies": {
-    "parcel": "^2.15.4"
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitest/ui": "^3.2.4",
+    "jsdom": "^26.1.0",
+    "parcel": "^2.15.4",
+    "vitest": "^3.2.4"
   }
 }
