@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../shared/ai-sme-colors.css">
     <script>
         tailwind.config = {
             theme: {
@@ -16,33 +17,37 @@
                         sans: ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'brand-primary': '#2563EB', // Blue 600
-                        'brand-primary-hover': '#1D4ED8', // Blue 700
-                        'brand-dark': '#111827', // Gray 900
-                        'brand-body': '#374151', // Gray 700
-                        'brand-muted': '#6B7280', // Gray 500
-                        'brand-bg': '#F9FAFB', // Gray 50
-                        'brand-card-bg': '#FFFFFF',
+                        'brand-primary': 'var(--ai-accent)',
+                        'brand-primary-hover': 'var(--ai-accent-hover)',
+                        'brand-dark': 'var(--ai-heading)',
+                        'brand-body': 'var(--ai-text)',
+                        'brand-muted': 'var(--ai-text)', // Using main text color for muted as well for simplicity
+                        'brand-bg': 'var(--ai-bg)',
+                        'brand-card-bg': 'var(--ai-card)',
                     }
                 }
             }
         }
     </script>
     <style>
+        body {
+            background-color: var(--ai-bg);
+            color: var(--ai-text);
+        }
         .nav-link.active {
-            color: #2563EB; /* brand-primary */
+            color: var(--ai-accent);
             font-weight: 600;
         }
         .section-title {
             font-size: 2.25rem;
             font-weight: 700;
-            color: #111827; /* brand-dark */
+            color: var(--ai-heading);
             margin-bottom: 1rem;
             text-align: center;
         }
         .section-subtitle {
             font-size: 1.125rem;
-            color: #6B7280; /* brand-muted */
+            color: var(--ai-text);
             text-align: center;
             max-width: 42rem; /* 3xl */
             margin-left: auto;
@@ -50,16 +55,16 @@
             margin-bottom: 3rem;
         }
         .card {
-            background-color: #FFFFFF; /* brand-card-bg */
+            background-color: var(--ai-card);
             border-radius: 0.75rem; /* larger radius */
             padding: 1.5rem;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #E5E7EB; /* Gray 200 */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            border: 1px solid var(--ai-border);
+            box-shadow: var(--ai-shadow-sm);
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            box-shadow: var(--ai-shadow-md);
         }
         .btn {
             display: inline-block;
@@ -70,19 +75,20 @@
             transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
         .btn-primary {
-            background-color: #2563EB; /* brand-primary */
+            background-color: var(--ai-accent);
             color: white;
         }
         .btn-primary:hover {
-            background-color: #1D4ED8; /* brand-primary-hover */
+            background-color: var(--ai-accent-hover);
         }
         .btn-secondary {
             background-color: transparent;
-            color: #2563EB; /* brand-primary */
-            border: 1px solid #2563EB; /* brand-primary */
+            color: var(--ai-accent);
+            border: 1px solid var(--ai-accent);
         }
         .btn-secondary:hover {
-            background-color: #DBEAFE; /* Blue 100 */
+            background-color: var(--ai-accent);
+            color: white;
         }
         .btn-lg {
             padding: 1rem 2rem;
