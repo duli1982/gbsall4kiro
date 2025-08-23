@@ -332,6 +332,14 @@
         </div>
     </footer>
 
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top-btn" class="hidden fixed bottom-8 right-8 bg-brand-primary text-white p-3 rounded-full shadow-lg hover:bg-brand-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary transition-all duration-300">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Mobile menu toggle
@@ -347,7 +355,7 @@
                 toggle.addEventListener('click', () => {
                     const content = toggle.nextElementSibling;
                     const icon = toggle.querySelector('svg');
-                    
+
                     // Close other accordions
                     document.querySelectorAll('.accordion-content').forEach(item => {
                         if (item !== content) {
@@ -373,7 +381,7 @@
                     });
                     btn.classList.add('active', 'text-brand-primary', 'border-brand-primary');
                     btn.classList.remove('text-brand-muted', 'hover:text-brand-dark');
-                    
+
                     tabContents.forEach(content => {
                         content.classList.add('hidden');
                     });
@@ -381,11 +389,22 @@
                 });
             });
 
-            // Active nav link highlighting on scroll
+            // Scroll to Top Button
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+
+            // Active nav link highlighting and Scroll to Top button visibility on scroll
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
+
             window.addEventListener('scroll', () => {
+                // Scroll to top button visibility
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                }
+
+                // Nav link highlighting
                 let current = '';
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
@@ -399,6 +418,14 @@
                     if (link.getAttribute('href').includes(current)) {
                         link.classList.add('active');
                     }
+                });
+            });
+
+            // Scroll to top click listener
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
             });
         });
