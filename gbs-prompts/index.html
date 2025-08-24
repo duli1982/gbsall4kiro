@@ -1091,30 +1091,35 @@
         closeGemModalBtn.addEventListener('click', hideGemModal);
 
         generateGemBtn.addEventListener('click', () => {
-    const persona = document.getElementById('gem-persona').value;
-    const task = document.getElementById('gem-task').value;
-    const context = document.getElementById('gem-context').value;
-    const audience = document.getElementById('gem-audience').value;
-    const tone = document.getElementById('gem-tone').value;
-    const format = document.getElementById('gem-format').value;
+            const persona = document.getElementById('gem-persona').value;
+            const task = document.getElementById('gem-task').value;
+            const context = document.getElementById('gem-context').value;
+            const audience = document.getElementById('gem-audience').value;
+            const tone = document.getElementById('gem-tone').value;
+            const format = document.getElementById('gem-format').value;
 
-    let gemString = `Persona: – "${persona}"\n\n`;
-    gemString += `Task: – "${task}"\n\n`;
-    gemString += `Context: – "${context}"\n\n`;
-    if (audience) gemString += `Audience (optional): – "${audience}"\n\n`;
-    if (tone) gemString += `Tone & Style (optional): – "${tone}"\n\n`;
-    gemString += `Format: – "${format}"`;
+            let gemString = `Persona: – “${persona}”\n\n`;
+            gemString += `Task: – “${task}”\n\n`;
+            gemString += `Context: – “${context}”\n\n`;
+            if (audience) gemString += `Audience (optional): – “${audience}”\n\n`;
+            if (tone) gemString += `Tone & Style (optional): – “${tone}”\n\n`;
+            gemString += `Format: – “${format}”`;
 
-    generatedGemTextarea.value = gemString;
-    generatedGemContainer.classList.remove('hidden');
-});
+            generatedGemTextarea.value = gemString;
+            generatedGemContainer.classList.remove('hidden');
+        });
 
-copyGemBtn.addEventListener('click', () => {
-    navigator.clipboard.writeText(generatedGemTextarea.value).then(() => {
-        copyGemBtn.textContent = 'Copied!';
-        setTimeout(() => { copyGemBtn.textContent = 'Copy Gem'; }, 2000);
-    }).catch(err => { console.error('Failed to copy text: ', err); });
-});
+        copyGemBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(generatedGemTextarea.value).then(() => {
+                copyGemBtn.textContent = 'Copied!';
+                setTimeout(() => { copyGemBtn.textContent = 'Copy Gem'; }, 2000);
+            }).catch(err => { console.error('Failed to copy text: ', err); });
+        });
+
+        // --- INITIAL LOAD ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadPrompts();
+        });
 
     </script>
 
