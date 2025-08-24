@@ -1026,16 +1026,38 @@
         }
 
         function populateGemModal(content) {
-            const personaMatch = content.match(/act as an? (.*)/i);
-            document.getElementById('gem-persona').value = personaMatch ? `You are a ${personaMatch[1]}` : '';
-            document.getElementById('gem-task').value = content;
-            document.getElementById('gem-context').value = '';
-            document.getElementById('gem-audience').value = '';
-            document.getElementById('gem-tone').value = '';
-            document.getElementById('gem-format').value = '';
-        }
-        function showGemModal(content) { populateGemModal(content); gemModal.classList.remove('hidden'); }
-        function hideGemModal() { gemModal.classList.add('hidden'); generatedGemTextarea.value = ''; generatedGemContainer.classList.add('hidden'); }
+    // Try to extract persona from content
+    const personaMatch = content.match(/act as an? (.*?)(?:\.|,|$)/i) || 
+                        content.match(/you are (.*?)(?:\.|,|$)/i);
+    
+    if (personaMatch) {
+        document.getElementById('gem-persona').value = `You are ${personaMatch[1]}`;
+    } else {
+        document.getElementById('gem-persona').value = 'You are a helpful assistant';
+    }
+    
+    // Set the task as the original content
+    document.getElementById('gem-task').value = content;
+    
+    // Clear other fields
+    document.getElementById('gem-context').value = '';
+    document.getElementById('gem-audience').value = '';
+    document.getElementById('gem-tone').value = '';
+    document.getElementById('gem-format').value = 'Provide a clear, well-structured response';
+}
+
+function showGemModal(content) {
+    populateGemModal(content);
+    gemModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+}
+
+function hideGemModal() {
+    gemModal.classList.add('hidden');
+    generatedGemTextarea.value = '';
+    generatedGemContainer.classList.add('hidden');
+    document.body.style.overflow = ''; // Restore scrolling
+}
 
         // --- EVENT LISTENERS ---
         homepageSearchInput.addEventListener('input', (e) => {
