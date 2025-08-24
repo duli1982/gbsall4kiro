@@ -1091,35 +1091,62 @@
         closeGemModalBtn.addEventListener('click', hideGemModal);
 
         generateGemBtn.addEventListener('click', () => {
-            const persona = document.getElementById('gem-persona').value;
-            const task = document.getElementById('gem-task').value;
-            const context = document.getElementById('gem-context').value;
-            const audience = document.getElementById('gem-audience').value;
-            const tone = document.getElementById('gem-tone').value;
-            const format = document.getElementById('gem-format').value;
+    const persona = document.getElementById('gem-persona').value.trim();
+    const task = document.getElementById('gem-task').value.trim();
+    const context = document.getElementById('gem-context').value.trim();
+    const audience = document.getElementById('gem-audience').value.trim();
+    const tone = document.getElementById('gem-tone').value.trim();
+    const format = document.getElementById('gem-format').value.trim();
 
-            let gemString = `Persona: – “${persona}”\n\n`;
-            gemString += `Task: – “${task}”\n\n`;
-            gemString += `Context: – “${context}”\n\n`;
-            if (audience) gemString += `Audience (optional): – “${audience}”\n\n`;
-            if (tone) gemString += `Tone & Style (optional): – “${tone}”\n\n`;
-            gemString += `Format: – “${format}”`;
+    // Build the gem string with proper formatting
+    let gemString = '';
+    
+    if (persona) {
+        gemString += `Persona: – "${persona}"\n\n`;
+    }
+    
+    if (task) {
+        gemString += `Task: – "${task}"\n\n`;
+    }
+    
+    if (context) {
+        gemString += `Context: – "${context}"\n\n`;
+    }
+    
+    if (audience) {
+        gemString += `Audience: – "${audience}"\n\n`;
+    }
+    
+    if (tone) {
+        gemString += `Tone & Style: – "${tone}"\n\n`;
+    }
+    
+    if (format) {
+        gemString += `Format: – "${format}"`;
+    }
 
-            generatedGemTextarea.value = gemString;
-            generatedGemContainer.classList.remove('hidden');
-        });
+    generatedGemTextarea.value = gemString;
+    generatedGemContainer.classList.remove('hidden');
+    
+    // Scroll the modal to show the generated gem
+    generatedGemContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+});
 
-        copyGemBtn.addEventListener('click', () => {
-            navigator.clipboard.writeText(generatedGemTextarea.value).then(() => {
-                copyGemBtn.textContent = 'Copied!';
-                setTimeout(() => { copyGemBtn.textContent = 'Copy Gem'; }, 2000);
-            }).catch(err => { console.error('Failed to copy text: ', err); });
-        });
-
-        // --- INITIAL LOAD ---
-        document.addEventListener('DOMContentLoaded', () => {
-            loadPrompts();
-        });
+copyGemBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(generatedGemTextarea.value).then(() => {
+        const originalText = copyGemBtn.innerHTML;
+        copyGemBtn.innerHTML = '✅ Copied!';
+        copyGemBtn.classList.add('bg-green-500');
+        setTimeout(() => { 
+            copyGemBtn.innerHTML = originalText;
+            copyGemBtn.classList.remove('bg-green-500');
+        }, 2000);
+    }).catch(err => { 
+        console.error('Failed to copy text: ', err); 
+        copyGemBtn.innerHTML = '❌ Error';
+        setTimeout(() => { copyGemBtn.innerHTML = '📋 Copy Gem'; }, 2000);
+    });
+});
 
     </script>
 
