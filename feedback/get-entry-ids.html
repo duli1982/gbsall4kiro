@@ -16,18 +16,18 @@
 </head>
 <body>
     <h1>Google Form Entry ID Extractor</h1>
-    
+
     <div class="container">
         <h3>Step 1: Enter your Google Form URL</h3>
         <p>Paste the URL of your Google Form (the one that ends with /viewform)</p>
         <input type="url" id="formUrl" placeholder="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform">
         <button onclick="extractEntryIds()">Extract Entry IDs</button>
     </div>
-    
+
     <div id="results" class="container" style="display: none;">
         <h3>Step 2: Copy these values to your feedback form</h3>
         <div id="entryIds"></div>
-        
+
         <h3>Step 3: Update your form action URL</h3>
         <p>Replace <code>YOUR_GOOGLE_FORM_ACTION_URL</code> in your feedback/index.html with:</p>
         <div id="actionUrl" class="code"></div>
@@ -36,16 +36,16 @@
     <script>
         function extractEntryIds() {
             const formUrl = document.getElementById('formUrl').value;
-            
+
             if (!formUrl || !formUrl.includes('docs.google.com/forms')) {
                 alert('Please enter a valid Google Forms URL');
                 return;
             }
-            
+
             // Create action URL
             const actionUrl = formUrl.replace('/viewform', '/formResponse');
             document.getElementById('actionUrl').textContent = actionUrl;
-            
+
             // Show instructions for manual extraction
             const entryIdsDiv = document.getElementById('entryIds');
             entryIdsDiv.innerHTML = `
@@ -57,7 +57,7 @@
                     <li>Look for patterns like <code>entry.123456789</code></li>
                     <li>Copy the entry IDs and replace the placeholders below:</li>
                 </ol>
-                
+
                 <div class="code">
                     <strong>Replace these in your feedback/index.html:</strong><br>
                     FEEDBACK_TYPE_ENTRY_ID → entry.XXXXXXXXX (first entry ID you find)<br>
@@ -69,12 +69,15 @@
                     MESSAGE_ENTRY_ID → entry.XXXXXXXXX (seventh entry ID)<br>
                     SUGGESTIONS_ENTRY_ID → entry.XXXXXXXXX (eighth entry ID)
                 </div>
-                
+
                 <p><strong>Example:</strong> If you find <code>entry.1234567890</code>, replace <code>FEEDBACK_TYPE_ENTRY_ID</code> with <code>1234567890</code></p>
             `;
-            
+
             document.getElementById('results').style.display = 'block';
         }
     </script>
+
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
 </body>
 </html>
