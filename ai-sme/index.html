@@ -321,13 +321,8 @@
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200">
-        <div class="container mx-auto px-6 py-8 text-center text-brand-muted">
-            <p>&copy; 2025 Randstad GBS. All Rights Reserved.</p>
-            <p class="text-sm mt-2">AI Horizon Portal | Your guide to the future of work.</p>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -344,7 +339,7 @@
                 toggle.addEventListener('click', () => {
                     const content = toggle.nextElementSibling;
                     const icon = toggle.querySelector('svg');
-                    
+
                     // Close other accordions
                     document.querySelectorAll('.accordion-content').forEach(item => {
                         if (item !== content) {
@@ -370,7 +365,7 @@
                     });
                     btn.classList.add('active', 'text-brand-primary', 'border-brand-primary');
                     btn.classList.remove('text-brand-muted', 'hover:text-brand-dark');
-                    
+
                     tabContents.forEach(content => {
                         content.classList.add('hidden');
                     });
@@ -381,7 +376,7 @@
             // Active nav link highlighting on scroll
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
+
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
@@ -402,7 +397,3 @@
     </script>
 </body>
 </html>
-
-
-
-

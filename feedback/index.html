@@ -75,7 +75,7 @@
             <div class="feedback-form p-8">
                 <!-- Hidden iframe to handle form submission -->
                 <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {showSuccessMessage();}"></iframe>
-                
+
                 <form id="feedbackForm" class="space-y-6" action="YOUR_GOOGLE_FORM_ACTION_URL" method="POST" target="hidden_iframe">
 
                     <!-- Feedback Type -->
@@ -219,19 +219,12 @@
         </main>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200 mt-16">
-        <div class="container mx-auto px-4 py-8">
-            <div class="text-center">
-                <p class="text-sm text-gray-500">© 2025 Randstad GBS. All rights reserved.</p>
-                <p class="text-xs text-gray-400 mt-2">Your feedback helps us build better learning experiences</p>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
+    <script src="../shared/scripts/footer.js" defer></script>
 
     <script>
         var submitted = false;
-        
+
         // Function to show success message after form submission
         function showSuccessMessage() {
             if (submitted) {
@@ -240,7 +233,7 @@
                 document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
             }
         }
-        
+
         // Handle form submission
         document.getElementById('feedbackForm').addEventListener('submit', function(e) {
             submitted = true;
