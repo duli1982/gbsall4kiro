@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Success Stories - Randstad GBS Learning Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../shared/hub-button.css">
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@400;500&display=swap"
+        rel="stylesheet">
     <style>
         .google-sans {
             font-family: 'Google Sans', sans-serif;
         }
+
         body {
             font-family: 'Roboto', sans-serif;
         }
+
         .use-case-card {
             border: 1px solid #dadce0;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
         }
+
         .use-case-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
         }
+
         .impact-stat {
             background: linear-gradient(135deg, #1967d2 0%, #4285f4 100%);
             color: white;
         }
+
         .category-badge {
             background: #e8f0fe;
             color: #1967d2;
         }
+
         .before-after {
             background: linear-gradient(90deg, #fef7f0 0%, #f0f9ff 100%);
         }
+
         .demo-section {
             background: linear-gradient(135deg, #f8f9fa 0%, #e8f0fe 100%);
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Navigation -->
@@ -46,17 +57,20 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <a href="/" class="google-sans text-xl font-bold text-gray-900">Randstad GBS Learning Hub</a>
-                <a href="/" class="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">← Back to Hub</a>
+                <a href="/" class="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">← Back to
+                    Hub</a>
             </div>
         </div>
     </nav>
 
     <div class="container mx-auto px-4 py-12">
-        
+
         <header class="text-center mb-16">
             <h1 class="google-sans text-4xl md:text-5xl font-bold text-gray-900 mb-4">AI Success Stories</h1>
-            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">Discover how AI is transforming daily work at Randstad GBS. These real-world examples show measurable impact and practical applications you can implement today.</p>
-            
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">Discover how AI is transforming daily work at
+                Randstad GBS. These real-world examples show measurable impact and practical applications you can
+                implement today.</p>
+
             <!-- Impact Overview -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 <div class="impact-stat p-6 rounded-xl">
@@ -77,11 +91,20 @@
         <main>
             <!-- Filter Categories -->
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button onclick="filterCases('all')" class="category-filter active px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">All Stories</button>
-                <button onclick="filterCases('sourcing')" class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Talent Sourcing</button>
-                <button onclick="filterCases('content')" class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Content Creation</button>
-                <button onclick="filterCases('analysis')" class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Data Analysis</button>
-                <button onclick="filterCases('communication')" class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Communication</button>
+                <button onclick="filterCases('all')"
+                    class="category-filter active px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">All
+                    Stories</button>
+                <button onclick="filterCases('sourcing')"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Talent
+                    Sourcing</button>
+                <button onclick="filterCases('content')"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Content
+                    Creation</button>
+                <button onclick="filterCases('analysis')"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Data
+                    Analysis</button>
+                <button onclick="filterCases('communication')"
+                    class="category-filter px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200">Communication</button>
             </div>
 
             <!-- Use Cases Grid -->
@@ -93,9 +116,10 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Talent Sourcing</span>
                         <span class="text-green-600 font-semibold">75% Time Saved</span>
                     </div>
-                    
-                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Boolean Search Generation</h3>
-                    
+
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Powered Boolean Search Generation
+                    </h3>
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -118,27 +142,32 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Real Example:</h4>
                         <div class="bg-gray-50 p-3 rounded text-sm">
                             <strong>Input:</strong> "Senior Java Developer with microservices experience"<br>
-                            <strong>AI Output:</strong> (Java OR "Java Developer") AND (Senior OR "Sr." OR Lead) AND (microservices OR "micro services" OR "service oriented") AND -junior -intern
+                            <strong>AI Output:</strong> (Java OR "Java Developer") AND (Senior OR "Sr." OR Lead) AND
+                            (microservices OR "micro services" OR "service oriented") AND -junior -intern
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('sourcing-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('sourcing-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
                 <!-- Use Case 2: Job Description Writing -->
                 <div class="use-case-card p-8 rounded-xl case-item" data-category="content">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content Creation</span>
+                        <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content
+                            Creation</span>
                         <span class="text-green-600 font-semibold">80% Faster</span>
                     </div>
-                    
-                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Intelligent Job Description Creation</h3>
-                    
+
+                    <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Intelligent Job Description Creation
+                    </h3>
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -161,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Success Metrics:</h4>
                         <div class="grid grid-cols-2 gap-4 text-center">
@@ -175,8 +204,10 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('content-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('content-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
                 <!-- Use Case 3: Candidate Outreach -->
@@ -185,9 +216,9 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Communication</span>
                         <span class="text-green-600 font-semibold">3x Response Rate</span>
                     </div>
-                    
+
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Personalized Candidate Outreach</h3>
-                    
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -210,18 +241,22 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Personalization Elements:</h4>
                         <div class="flex flex-wrap gap-2">
                             <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Company Research</span>
                             <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Role Relevance</span>
-                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Career Progression</span>
-                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Industry Insights</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Career
+                                Progression</span>
+                            <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">Industry
+                                Insights</span>
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('communication-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('communication-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
                 <!-- Use Case 4: Market Analysis -->
@@ -230,9 +265,9 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Data Analysis</span>
                         <span class="text-green-600 font-semibold">90% Accuracy</span>
                     </div>
-                    
+
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Market Intelligence</h3>
-                    
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -255,7 +290,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Analysis Includes:</h4>
                         <div class="grid grid-cols-2 gap-2 text-sm">
@@ -265,19 +300,22 @@
                             <div>• Location insights</div>
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('analysis-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('analysis-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
                 <!-- Use Case 5: Interview Preparation -->
                 <div class="use-case-card p-8 rounded-xl case-item" data-category="content">
                     <div class="flex items-center justify-between mb-4">
-                        <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content Creation</span>
+                        <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content
+                            Creation</span>
                         <span class="text-green-600 font-semibold">85% Better Prep</span>
                     </div>
-                    
+
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">AI-Generated Interview Questions</h3>
-                    
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -300,18 +338,21 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Question Categories:</h4>
                         <div class="flex flex-wrap gap-2">
-                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Technical Skills</span>
+                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Technical
+                                Skills</span>
                             <span class="bg-pink-100 text-pink-800 px-2 py-1 rounded text-xs">Behavioral</span>
                             <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Situational</span>
                             <span class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-xs">Culture Fit</span>
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('interview-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('interview-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
                 <!-- Use Case 6: Performance Reports -->
@@ -320,9 +361,9 @@
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Data Analysis</span>
                         <span class="text-green-600 font-semibold">70% Time Saved</span>
                     </div>
-                    
+
                     <h3 class="google-sans text-xl font-bold text-gray-900 mb-3">Automated Performance Reporting</h3>
-                    
+
                     <div class="before-after p-4 rounded-lg mb-4">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
@@ -345,7 +386,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-4">
                         <h4 class="font-semibold text-gray-900 mb-2">Report Features:</h4>
                         <div class="grid grid-cols-2 gap-2 text-sm">
@@ -355,8 +396,10 @@
                             <div>• Recommendations</div>
                         </div>
                     </div>
-                    
-                    <button onclick="showDemo('reporting-demo')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibeld hover:bg-blue-700 transition-colors duration-200">Try This Use Case</button>
+
+                    <button onclick="showDemo('reporting-demo')"
+                        class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Try
+                        This Use Case</button>
                 </div>
 
             </div>
@@ -366,15 +409,18 @@
                 <div class="max-w-4xl mx-auto">
                     <div class="text-center mb-8">
                         <h2 class="google-sans text-2xl font-bold text-gray-900 mb-4">Try It Yourself</h2>
-                        <p class="text-gray-600">Experience how AI can transform your daily work with this interactive demo.</p>
+                        <p class="text-gray-600">Experience how AI can transform your daily work with this interactive
+                            demo.</p>
                     </div>
-                    
+
                     <div id="demo-content" class="bg-white p-6 rounded-lg border">
                         <!-- Demo content will be loaded here -->
                     </div>
-                    
+
                     <div class="text-center mt-6">
-                        <button onclick="hideDemo()" class="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-200">Close Demo</button>
+                        <button onclick="hideDemo()"
+                            class="px-6 py-2 text-gray-600 hover:text-gray-800 transition-colors duration-200">Close
+                            Demo</button>
                     </div>
                 </div>
             </div>
@@ -382,11 +428,16 @@
             <!-- Call to Action -->
             <div class="text-center mt-16 bg-white p-12 rounded-xl border">
                 <h2 class="google-sans text-3xl font-bold text-gray-900 mb-4">Ready to Transform Your Work?</h2>
-                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Start implementing these AI solutions in your daily workflow. Access our training programs and prompt libraries to get started.</p>
-                
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">Start implementing these AI solutions in your
+                    daily workflow. Access our training programs and prompt libraries to get started.</p>
+
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/gbs-prompts/" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Explore Prompt Library</a>
-                    <a href="/rpo-training/" class="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200">Start Training Program</a>
+                    <a href="/gbs-prompts/"
+                        class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200">Explore
+                        Prompt Library</a>
+                    <a href="/rpo-training/"
+                        class="border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors duration-200">Start
+                        Training Program</a>
                 </div>
             </div>
         </main>
@@ -407,29 +458,35 @@
         function filterCases(category) {
             const cases = document.querySelectorAll('.case-item');
             const filters = document.querySelectorAll('.category-filter');
-            
+
             // Update active filter
             filters.forEach(filter => filter.classList.remove('active'));
             event.target.classList.add('active');
-            
+
             // Show/hide cases
             cases.forEach(case => {
-                if (category === 'all' || case.dataset.category === category) {
+                if(category === 'all' || case.dataset.category === category) {
                     case.style.display = 'block';
-                } else {
+            } else {
                     case.style.display = 'none';
-                }
-            });
+            }
+        });
         }
 
         // Demo functionality
         function showDemo(demoType) {
+            alert('Demo clicked: ' + demoType);
             const demoSection = document.getElementById('demo-section');
             const demoContent = document.getElementById('demo-content');
-            
+
+            if (!demoSection || !demoContent) {
+                alert('Demo elements not found!');
+                return;
+            }
+
             let content = '';
-            
-            switch(demoType) {
+
+            switch (demoType) {
                 case 'sourcing-demo':
                     content = `
                         <h3 class="text-xl font-bold mb-4">Boolean Search Generator Demo</h3>
@@ -480,7 +537,7 @@
                         </div>
                     `;
             }
-            
+
             demoContent.innerHTML = content;
             demoSection.classList.remove('hidden');
             demoSection.scrollIntoView({ behavior: 'smooth' });
@@ -493,12 +550,12 @@
         function generateSearch() {
             const jobTitle = document.getElementById('jobTitle').value;
             const skills = document.getElementById('skills').value;
-            
+
             if (!jobTitle) return;
-            
+
             const result = document.getElementById('searchResult');
             const resultContent = result.querySelector('div');
-            
+
             // Simple boolean search generation (in real implementation, this would use AI)
             let searchString = `(${jobTitle.replace(/\s+/g, ' OR "')}")`;
             if (skills) {
@@ -506,7 +563,7 @@
                 searchString += ` AND (${skillArray.join(' OR ')})`;
             }
             searchString += ' -junior -intern';
-            
+
             resultContent.textContent = searchString;
             result.classList.remove('hidden');
         }
@@ -514,12 +571,12 @@
         function generateJD() {
             const position = document.getElementById('position').value;
             const companyType = document.getElementById('companyType').value;
-            
+
             if (!position) return;
-            
+
             const result = document.getElementById('jdResult');
             const resultContent = result.querySelector('div');
-            
+
             // Sample job description generation
             const jdText = `
                 <strong>${position}</strong><br><br>
@@ -533,13 +590,13 @@
                 • Strong technical and communication skills<br>
                 • Bachelor's degree in related field
             `;
-            
+
             resultContent.innerHTML = jdText;
             result.classList.remove('hidden');
         }
 
         // Add active styles for filters
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const style = document.createElement('style');
             style.textContent = `
                 .category-filter {
@@ -564,4 +621,5 @@
     </script>
 
 </body>
+
 </html>
