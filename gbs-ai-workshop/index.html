@@ -1154,5 +1154,91 @@
 
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
+
+// Add this JavaScript before the closing </body> tag
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all navigation links
+    const navLinks = document.querySelectorAll('.nav-link, .nav-dropdown-item');
+    const sections = document.querySelectorAll('.page-section');
+    
+    // Function to show a specific section
+    function showSection(targetId) {
+        // Hide all sections
+        sections.forEach(section => {
+            section.classList.add('hidden');
+            section.classList.remove('fade-in');
+        });
+        
+        // Show target section
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+            targetSection.classList.add('fade-in');
+        }
+        
+        // Update active nav link
+        navLinks.forEach(link => {
+            link.classList.remove('text-[#4A90E2]', 'font-semibold');
+            link.classList.add('text-gray-700');
+        });
+        
+        // Set active nav link
+        const activeLink = document.querySelector(`a[href="#${targetId}"]`);
+        if (activeLink) {
+            activeLink.classList.remove('text-gray-700');
+            activeLink.classList.add('text-[#4A90E2]', 'font-semibold');
+        }
+    }
+    
+    // Handle navigation clicks
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1);
+                showSection(targetId);
+                
+                // Close mobile dropdown if open
+                const dropdownMenu = document.getElementById('tools-dropdown-menu');
+                if (dropdownMenu) {
+                    dropdownMenu.classList.add('hidden');
+                }
+            }
+        });
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash.substring(1);
+        if (hash) {
+            showSection(hash);
+        }
+    });
+    
+    // Show initial section based on URL hash or default to 'why'
+    const initialHash = window.location.hash.substring(1) || 'why';
+    showSection(initialHash);
+    
+    // Tools dropdown functionality
+    const toolsDropdownBtn = document.getElementById('tools-dropdown-btn');
+    const toolsDropdownMenu = document.getElementById('tools-dropdown-menu');
+    
+    if (toolsDropdownBtn && toolsDropdownMenu) {
+        toolsDropdownBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            toolsDropdownMenu.classList.toggle('hidden');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!toolsDropdownBtn.contains(e.target) && !toolsDropdownMenu.contains(e.target)) {
+                toolsDropdownMenu.classList.add('hidden');
+            }
+        });
+    }
+});
+
 </body>
 </html>
