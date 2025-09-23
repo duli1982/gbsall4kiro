@@ -16,16 +16,52 @@
         .category-badge { background: #e8f0fe; color: #1967d2; }
         .before-after { background: linear-gradient(90deg, #fef7f0 0%, #f0f9ff 100%); }
         .demo-section { background: linear-gradient(135deg, #f8f9fa 0%, #e8f0fe 100%); }
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: #4A90E2;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-to-top:hover {
+            background-color: #3A7BC8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(74, 144, 226, 0.4);
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-to-top" class="scroll-to-top" title="Scroll to top">
+        ↑
+    </button>
 
     <!-- Navigation -->
     <nav class="bg-white border-b border-gray-200">
         <div class="container mx-auto px-4 py-4">
             <div class="flex items-center justify-between">
                 <a href="/" class="google-sans text-xl font-bold text-gray-900">Randstad GBS Learning Hub</a>
-                <a href="/" class="text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200">← Back to Hub</a>
+                <a href="../index.html" class="hub-button">Back To Hub</a>
             </div>
         </div>
     </nav>
@@ -64,7 +100,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
 
                 <!-- Use Case 1: Candidate Sourcing -->
-                <div class="use-case-card p-8 rounded-xl case-item" data-category="sourcing">
+                <div id="sourcing-demo" class="use-case-card p-8 rounded-xl case-item" data-category="sourcing">
                     <div class="flex items-center justify-between mb-4">
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Talent Sourcing</span>
                         <span class="text-green-600 font-semibold">75% Time Saved</span>
@@ -103,7 +139,7 @@
                 </div>
 
                 <!-- Use Case 2: Job Description Writing -->
-                <div class="use-case-card p-8 rounded-xl case-item" data-category="content">
+                <div id="content-demo" class="use-case-card p-8 rounded-xl case-item" data-category="content">
                     <div class="flex items-center justify-between mb-4">
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Content Creation</span>
                         <span class="text-green-600 font-semibold">80% Faster</span>
@@ -148,7 +184,7 @@
                 </div>
 
                 <!-- Use Case 3: Candidate Outreach -->
-                <div class="use-case-card p-8 rounded-xl case-item" data-category="communication">
+                <div id="communication-demo" class="use-case-card p-8 rounded-xl case-item" data-category="communication">
                     <div class="flex items-center justify-between mb-4">
                         <span class="category-badge px-3 py-1 rounded-full text-xs font-semibold">Communication</span>
                         <span class="text-green-600 font-semibold">3x Response Rate</span>
@@ -343,6 +379,7 @@
 
     <div id="footer-placeholder"></div>
     <script src="../shared/scripts/footer.js" defer></script>
+    <script src="../shared/scripts/smooth-scroll.js" defer></script>
 
     <script>
         // Helper: show/hide demo
@@ -516,6 +553,26 @@ Requirements:
             });
         }
 
+        // Scroll to Top Functionality
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        // Show/hide scroll to top button based on scroll position
+        function toggleScrollToTopButton() {
+            if (window.pageYOffset > 300) {
+                scrollToTopBtn.classList.add('visible');
+            } else {
+                scrollToTopBtn.classList.remove('visible');
+            }
+        }
+
+        // Smooth scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
         // DOM ready
         document.addEventListener('DOMContentLoaded', function() {
             // Styles for filters
@@ -549,6 +606,10 @@ Requirements:
             // Wire close demo
             const demoClose = document.getElementById('demo-close');
             if (demoClose) demoClose.addEventListener('click', hideDemo);
+
+            // Wire scroll to top functionality
+            window.addEventListener('scroll', toggleScrollToTopButton);
+            scrollToTopBtn.addEventListener('click', scrollToTop);
         });
     </script>
 
