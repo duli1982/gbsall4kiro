@@ -251,9 +251,17 @@
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); }
-            50% { box-shadow: 0 4px 20px rgba(74, 144, 226, 0.5); }
-            100% { box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3); }
+            0% {
+                box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 4px 20px rgba(74, 144, 226, 0.5);
+            }
+
+            100% {
+                box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
+            }
         }
 
         /* Tour Overlay */
@@ -1167,12 +1175,17 @@
             completeTour() {
                 this.markTourCompleted();
                 this.hideTourButton();
+
+                // First hide the tooltip immediately
+                this.tourTooltip.classList.remove('active');
+
+                // Then hide the overlay and show completion message
                 this.hideTourOverlay();
 
-                // Show completion message
+                // Show completion message after overlay is fully hidden
                 setTimeout(() => {
                     this.showCompletionMessage();
-                }, 300);
+                }, 600); // Increased delay to ensure overlay is fully hidden
             }
 
             showCompletionMessage() {
@@ -1264,20 +1277,22 @@
 
                     let top, left;
                     const margin = 24; // Increased margin for more space
+                    const extraUpwardOffset = this.currentStep === this.steps.length - 1 ? 40 : 0; // Extra offset for last step
 
                     // Remove previous arrow classes
                     this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
 
                     // Default: show tooltip above or below target, with margin
                     if (step.position === 'top') {
-                        // Place tooltip above the target, but if not enough space, place to the right
-                        if (targetRect.top - tooltipRect.height - margin > 0) {
-                            top = targetRect.top - tooltipRect.height - margin;
+                        // Place tooltip above the target, with extra offset for last step
+                        const requiredSpace = tooltipRect.height + margin + extraUpwardOffset;
+                        if (targetRect.top - requiredSpace > 0) {
+                            top = targetRect.top - tooltipRect.height - margin - extraUpwardOffset;
                             left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
                             this.tourTooltip.classList.add('arrow-bottom');
                         } else {
-                            // Not enough space above, place to the right
-                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                            // Not enough space above, place to the right but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
                             left = targetRect.right + margin;
                             this.tourTooltip.classList.add('arrow-left');
                         }
@@ -1288,17 +1303,17 @@
                             left = targetRect.left + (targetRect.width / 2) - (tooltipRect.width / 2);
                             this.tourTooltip.classList.add('arrow-top');
                         } else {
-                            // Not enough space below, place to the left
-                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                            // Not enough space below, place to the left but higher up
+                            top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
                             left = targetRect.left - tooltipRect.width - margin;
                             this.tourTooltip.classList.add('arrow-right');
                         }
                     } else if (step.position === 'left') {
-                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
                         left = targetRect.left - tooltipRect.width - margin;
                         this.tourTooltip.classList.add('arrow-right');
                     } else if (step.position === 'right') {
-                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2);
+                        top = targetRect.top + (targetRect.height / 2) - (tooltipRect.height / 2) - extraUpwardOffset;
                         left = targetRect.right + margin;
                         this.tourTooltip.classList.add('arrow-left');
                     } else {
@@ -1340,6 +1355,12 @@
                     this.tourOverlay.classList.remove('active');
                     document.body.style.overflow = '';
                     this.removeHighlights();
+
+                    // Reset tooltip position and styling
+                    this.tourTooltip.style.top = '';
+                    this.tourTooltip.style.left = '';
+                    this.tourTooltip.style.transform = '';
+                    this.tourTooltip.classList.remove('arrow-top', 'arrow-bottom', 'arrow-left', 'arrow-right');
                 }, 300);
             }
         }
