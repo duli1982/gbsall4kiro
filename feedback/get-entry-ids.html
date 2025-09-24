@@ -20,7 +20,7 @@
     <div class="container">
         <h3>Step 1: Enter your Google Form URL</h3>
         <p>Paste the URL of your Google Form (the one that ends with /viewform)</p>
-        <input type="url" id="formUrl" placeholder="https://docs.google.com/forms/d/e/1FAIpQLSelwbgIYE0mtrU9m2HUKAOyy3-Nt4HrHAoLzLoEFGDCfaZ5MA/viewform">
+        <input type="url" id="formUrl" placeholder="https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform">
         <button onclick="extractEntryIds()">Extract Entry IDs</button>
     </div>
 
@@ -29,7 +29,7 @@
         <div id="entryIds"></div>
 
         <h3>Step 3: Update your form action URL</h3>
-        <p>Replace <code>https://docs.google.com/forms/d/e/1FAIpQLSelwbgIYE0mtrU9m2HUKAOyy3-Nt4HrHAoLzLoEFGDCfaZ5MA/formResponse</code> in your feedback/index.html with:</p>
+        <p>Replace <code>YOUR_GOOGLE_FORM_ACTION_URL</code> in your feedback/index.html with:</p>
         <div id="actionUrl" class="code"></div>
     </div>
 
